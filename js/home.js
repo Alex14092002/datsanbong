@@ -89,26 +89,30 @@ function createScheduleTable(tab) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  fetchData();
-
-  const tabButtons = document.querySelectorAll('.nav-link');
-  tabButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      tabButtons.forEach((btn) => {
-        btn.classList.remove('active');
-        btn.setAttribute('aria-selected', 'false');
+    fetchData();
+  
+    const tabButtons = document.querySelectorAll('.nav-link');
+    tabButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        // Xóa lớp 'active' khỏi tất cả các nav-link
+        tabButtons.forEach((btn) => {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-selected', 'false');
+        });
+  
+        // Thêm lớp 'active' vào nav-link được bấm
+        button.classList.add('active');
+        button.setAttribute('aria-selected', 'true');
+  
+        const tabPanes = document.querySelectorAll('.tab-pane');
+        tabPanes.forEach((pane) => {
+          pane.classList.remove('show', 'active');
+        });
+  
+        const targetPaneId = button.getAttribute('data-bs-target').substring(1);
+        const targetPane = document.getElementById(targetPaneId);
+        targetPane.classList.add('show', 'active');
       });
-      button.classList.add('active');
-      button.setAttribute('aria-selected', 'true');
-
-      const tabPanes = document.querySelectorAll('.tab-pane');
-      tabPanes.forEach((pane) => {
-        pane.classList.remove('show', 'active');
-      });
-
-      const targetPaneId = button.getAttribute('data-bs-target').substring(1);
-      const targetPane = document.getElementById(targetPaneId);
-      targetPane.classList.add('show', 'active');
     });
   });
-});
+  
