@@ -6,7 +6,7 @@
         "A1": {
           "name": "Sân A1",
           "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" },
+            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
             "5:00": { "status": "Chưa book" },
             "5:30": { "status": "Chưa book" },
             "6:00": { "status": "Chưa book" },
@@ -50,7 +50,7 @@
         "A2": {
           "name": "Sân A2",
           "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" },
+            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
             "5:00": { "status": "Chưa book" },
             "5:30": { "status": "Chưa book" },
             "6:00": { "status": "Chưa book" },
@@ -94,7 +94,7 @@
         "A3": {
           "name": "Sân A3",
           "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" },
+            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
             "5:00": { "status": "Chưa book" },
             "5:30": { "status": "Chưa book" },
             "6:00": { "status": "Chưa book" },
@@ -138,7 +138,7 @@
         "A4": {
           "name": "Sân A4",
           "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" },
+            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
             "5:00": { "status": "Chưa book" },
             "5:30": { "status": "Chưa book" },
             "6:00": { "status": "Chưa book" },
@@ -187,7 +187,7 @@
         "B1": {
           "name": "Sân B1",
           "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" },
+            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
             "5:00": { "status": "Chưa book" },
             "5:30": { "status": "Chưa book" },
             "6:00": { "status": "Chưa book" },
@@ -231,7 +231,7 @@
         "B2": {
           "name": "Sân B2",
           "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" },
+            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
             "5:00": { "status": "Chưa book" },
             "5:30": { "status": "Chưa book" },
             "6:00": { "status": "Chưa book" },
@@ -275,7 +275,7 @@
         "B3": {
           "name": "Sân B3",
           "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" },
+            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
             "5:00": { "status": "Chưa book" },
             "5:30": { "status": "Chưa book" },
             "6:00": { "status": "Chưa book" },
@@ -319,7 +319,7 @@
         "B4": {
           "name": "Sân B4",
           "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" },
+            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
             "5:00": { "status": "Chưa book" },
             "5:30": { "status": "Chưa book" },
             "6:00": { "status": "Chưa book" },
@@ -368,7 +368,7 @@
         "C1": {
           "name": "Sân C1",
           "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" },
+            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
             "5:00": { "status": "Chưa book" },
             "5:30": { "status": "Chưa book" },
             "6:00": { "status": "Chưa book" },
@@ -412,7 +412,7 @@
         "C2": {
           "name": "Sân C2",
           "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" },
+            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
             "5:00": { "status": "Chưa book" },
             "5:30": { "status": "Chưa book" },
             "6:00": { "status": "Chưa book" },
@@ -456,7 +456,7 @@
         "C3": {
           "name": "Sân C3",
           "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" },
+            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
             "5:00": { "status": "Chưa book" },
             "5:30": { "status": "Chưa book" },
             "6:00": { "status": "Chưa book" },
@@ -500,7 +500,7 @@
         "C4": {
           "name": "Sân C4",
           "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" },
+            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
             "5:00": { "status": "Chưa book" },
             "5:30": { "status": "Chưa book" },
             "6:00": { "status": "Chưa book" },
@@ -549,7 +549,7 @@
         "D1": {
           "name": "Sân D1",
           "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" },
+            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
             "5:00": { "status": "Chưa book" },
             "5:30": { "status": "Chưa book" },
             "6:00": { "status": "Chưa book" },
@@ -593,7 +593,7 @@
         "D2": {
           "name": "Sân D2",
           "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" },
+            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
             "5:00": { "status": "Chưa book" },
             "5:30": { "status": "Chưa book" },
             "6:00": { "status": "Chưa book" },
@@ -637,7 +637,7 @@
         "D3": {
           "name": "Sân D3",
           "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" },
+            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
             "5:00": { "status": "Chưa book" },
             "5:30": { "status": "Chưa book" },
             "6:00": { "status": "Chưa book" },
@@ -681,7 +681,7 @@
         "D4": {
           "name": "Sân D4",
           "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" },
+            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
             "5:00": { "status": "Chưa book" },
             "5:30": { "status": "Chưa book" },
             "6:00": { "status": "Chưa book" },

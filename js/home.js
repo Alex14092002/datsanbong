@@ -112,7 +112,9 @@ function createScheduleTable(tab) {
         } else if (status === 'Đã book') {
           statusCell.classList.add('red-bg');
           const nameGruop = document.createElement('h5')
-          nameGruop.innerHTML = tab.courts[court].schedule[timeSlot].groupId
+          nameGruop.innerHTML += `
+            ${tab.courts[court].schedule[timeSlot].groupId } - ${tab.courts[court].schedule[timeSlot].level}
+          ` 
           statusCell.appendChild(nameGruop); // Thêm phần tử <h5> vào ô <td>
         }
   
