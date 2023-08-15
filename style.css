@@ -12,6 +12,15 @@ table{
  table  tr td , table tr th{
     border: 1px solid #000;
 }
+.yellow-bg {
+    background-color: yellow;
+  }
+  
+  .red-bg {
+    background-color: red;
+    color: white;
+  }
+  
 .button{
     font-size: 14px;
 }

@@ -1,4 +1,3 @@
-
 const apiUrl = 'https://sancaul-default-rtdb.firebaseio.com/.json';
 
 async function fetchData() {
@@ -73,10 +72,16 @@ async function fetchDataForTabs(tabs) {
   }
 }
 
-
 function createScheduleTable(tab) {
     const courts = Object.keys(tab.courts);
-    const timeSlots = Object.keys(tab.courts[courts[0]].schedule);
+    const unsortedTimeSlots = Object.keys(tab.courts[courts[0]].schedule);
+  
+    // Sắp xếp lại danh sách thời gian từ 4:00 đến 23:30
+    const sortedTimeSlots = unsortedTimeSlots.sort((a, b) => {
+      const timeA = parseInt(a.split(':')[0]);
+      const timeB = parseInt(b.split(':')[0]);
+      return timeA - timeB;
+    });
   
     const scheduleTable = document.createElement('table');
     scheduleTable.className = 'table';
@@ -89,14 +94,27 @@ function createScheduleTable(tab) {
   
     scheduleTable.appendChild(headerRow);
   
-    for (const timeSlot of timeSlots) {
+    for (const timeSlot of sortedTimeSlots) {
       const timeRow = document.createElement('tr');
       timeRow.innerHTML = `<td>${timeSlot}</td>`;
   
       for (const court of courts) {
         const status = tab.courts[court].schedule[timeSlot].status;
         const statusCell = document.createElement('td');
-        statusCell.textContent = status;
+       console.log(tab.courts[court].schedule[timeSlot].groupId);
+        // Kiểm tra trạng thái và thiết lập màu sắc
+        if (status === 'Chưa book') {
+          statusCell.classList.add('yellow-bg');
+          const bookButton = document.createElement('button');
+          bookButton.className = 'btn btn-primary';
+          bookButton.textContent = 'Đặt lịch';
+          statusCell.appendChild(bookButton);
+        } else if (status === 'Đã book') {
+          statusCell.classList.add('red-bg');
+          const nameGruop = document.createElement('h5')
+          nameGruop.innerHTML = tab.courts[court].schedule[timeSlot].groupId
+        }
+  
         timeRow.appendChild(statusCell);
       }
   
@@ -105,4 +123,5 @@ function createScheduleTable(tab) {
   
     return scheduleTable;
   }
+  
 fetchData();
