@@ -101,18 +101,19 @@ function createScheduleTable(tab) {
       for (const court of courts) {
         const status = tab.courts[court].schedule[timeSlot].status;
         const statusCell = document.createElement('td');
-       console.log(tab.courts[court].schedule[timeSlot].groupId);
+      
         // Kiểm tra trạng thái và thiết lập màu sắc
         if (status === 'Chưa book') {
           statusCell.classList.add('yellow-bg');
           const bookButton = document.createElement('button');
-          bookButton.className = 'btn btn-primary';
+          bookButton.classList.add('btn-dat');
           bookButton.textContent = 'Đặt lịch';
           statusCell.appendChild(bookButton);
         } else if (status === 'Đã book') {
           statusCell.classList.add('red-bg');
           const nameGruop = document.createElement('h5')
           nameGruop.innerHTML = tab.courts[court].schedule[timeSlot].groupId
+          statusCell.appendChild(nameGruop); // Thêm phần tử <h5> vào ô <td>
         }
   
         timeRow.appendChild(statusCell);
