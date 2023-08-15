@@ -9,6 +9,17 @@ table{
 .time{
     width: 10%;
 }
-table thead th , table tbody tr td{
+ table  tr td{
     border: 1px solid #000;
+}
+.button{
+    font-size: 14px;
+}
+.main-nav{
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between !important;
+}
+.nav{
+    justify-content: center;
 }

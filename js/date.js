@@ -31,3 +31,26 @@ function generateDateOptions() {
   `;
   
   viewDayDiv.appendChild(selectElement);
+
+
+
+  function generateTimeSlots() {
+    const timeSlots = [];
+    for (let hour = 4; hour < 24; hour++) {
+      for (let minute = 0; minute < 60; minute += 30) {
+        const formattedHour = hour.toString().padStart(2, '0');
+        const formattedMinute = minute.toString().padStart(2, '0');
+        const timeSlot = `${formattedHour}h${formattedMinute}`;
+        timeSlots.push(timeSlot);
+      }
+    }
+    return timeSlots;
+  }
+  
+  const timeSlots = generateTimeSlots();
+  
+  // // In ra danh sách các khung giờ
+  // timeSlots.forEach(timeSlot => {
+  //   console.log(timeSlot);
+  // });
+  
