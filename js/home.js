@@ -111,7 +111,7 @@ function createScheduleTable(tab) {
           statusCell.appendChild(bookButton);
         } else if (status === 'Đã book') {
           statusCell.classList.add('red-bg');
-          const nameGruop = document.createElement('h5')
+          const nameGruop = document.createElement('span')
           nameGruop.innerHTML += `
             ${tab.courts[court].schedule[timeSlot].groupId } - ${tab.courts[court].schedule[timeSlot].level}
           ` 
