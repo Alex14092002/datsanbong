@@ -1,3 +1,4 @@
+
 const apiUrl = 'https://sancaul-default-rtdb.firebaseio.com/.json';
 
 async function fetchData() {
@@ -14,6 +15,13 @@ function displayTabsAndData(data) {
   const tabContainer = document.getElementById('pills-tab');
   const contentContainer = document.getElementById('pills-tabContent');
 
+  // Loại bỏ lớp active khỏi tất cả các tab và nội dung
+  const existingTabs = tabContainer.querySelectorAll('.nav-link');
+  existingTabs.forEach(tab => tab.classList.remove('active'));
+
+  const existingContents = contentContainer.querySelectorAll('.tab-pane');
+  existingContents.forEach(content => content.classList.remove('show', 'active'));
+
   let isFirstTab = true;
 
   for (const key in data.tabs) {
@@ -26,7 +34,7 @@ function displayTabsAndData(data) {
     tabButton.role = 'tab';
     tabButton.ariaControls = `pills-${key}`;
     tabButton.textContent = tab.name;
-    tabButton.setAttribute('aria-selected', isFirstTab ? 'true' : 'false'); // Cập nhật aria-selected
+    tabButton.setAttribute('aria-selected', isFirstTab ? 'true' : 'false');
     tabContainer.appendChild(tabButton);
 
     const tabContent = document.createElement('div');
@@ -37,11 +45,20 @@ function displayTabsAndData(data) {
     contentContainer.appendChild(tabContent);
 
     if (isFirstTab) {
-      tabButton.classList.add('active');  // Thêm lớp 'active' cho tab đầu tiên
-      tabContent.classList.add('show', 'active');  // Thêm lớp 'show' và 'active' cho nội dung tab đầu tiên
+      tabButton.classList.add('active');
+      tabContent.classList.add('show', 'active');
       isFirstTab = false;
     }
   }
+
+  // Bổ sung lắng nghe sự kiện show.bs.tab
+  const tabList = document.querySelector('ul.nav');
+  tabList.addEventListener('show.bs.tab', (event) => {
+    const previousTab = tabList.querySelector('.nav-link.active');
+    if (previousTab) {
+      previousTab.classList.remove('active');
+    }
+  });
 
   fetchDataForTabs(data.tabs);
 }
@@ -56,63 +73,36 @@ async function fetchDataForTabs(tabs) {
   }
 }
 
+
 function createScheduleTable(tab) {
-  const courts = Object.keys(tab.courts);
-  const timeSlots = Object.keys(tab.courts[courts[0]].schedule);
-
-  const scheduleTable = document.createElement('table');
-  scheduleTable.className = 'table';
-  const headerRow = document.createElement('tr');
-  headerRow.innerHTML = '<th>Time</th>';
-
-  for (const court of courts) {
-    headerRow.innerHTML += `<th>${court}</th>`;
-  }
-
-  scheduleTable.appendChild(headerRow);
-
-  for (const timeSlot of timeSlots) {
-    const timeRow = document.createElement('tr');
-    timeRow.innerHTML = `<td>${timeSlot}</td>`;
-
+    const courts = Object.keys(tab.courts);
+    const timeSlots = Object.keys(tab.courts[courts[0]].schedule);
+  
+    const scheduleTable = document.createElement('table');
+    scheduleTable.className = 'table';
+    const headerRow = document.createElement('tr');
+    headerRow.innerHTML = '<th>Time</th>';
+  
     for (const court of courts) {
-      const status = tab.courts[court].schedule[timeSlot].status;
-      const statusCell = document.createElement('td');
-      statusCell.textContent = status;
-      timeRow.appendChild(statusCell);
+      headerRow.innerHTML += `<th>${court}</th>`;
     }
-
-    scheduleTable.appendChild(timeRow);
+  
+    scheduleTable.appendChild(headerRow);
+  
+    for (const timeSlot of timeSlots) {
+      const timeRow = document.createElement('tr');
+      timeRow.innerHTML = `<td>${timeSlot}</td>`;
+  
+      for (const court of courts) {
+        const status = tab.courts[court].schedule[timeSlot].status;
+        const statusCell = document.createElement('td');
+        statusCell.textContent = status;
+        timeRow.appendChild(statusCell);
+      }
+  
+      scheduleTable.appendChild(timeRow);
+    }
+  
+    return scheduleTable;
   }
-
-  return scheduleTable;
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    fetchData();
-  
-    const tabButtons = document.querySelectorAll('.nav-link');
-    tabButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        // Xóa lớp 'active' khỏi tất cả các nav-link
-        tabButtons.forEach((btn) => {
-          btn.classList.remove('active');
-          btn.setAttribute('aria-selected', 'false');
-        });
-  
-        // Thêm lớp 'active' vào nav-link được bấm
-        button.classList.add('active');
-        button.setAttribute('aria-selected', 'true');
-  
-        const tabPanes = document.querySelectorAll('.tab-pane');
-        tabPanes.forEach((pane) => {
-          pane.classList.remove('show', 'active');
-        });
-  
-        const targetPaneId = button.getAttribute('data-bs-target').substring(1);
-        const targetPane = document.getElementById(targetPaneId);
-        targetPane.classList.add('show', 'active');
-      });
-    });
-  });
-  
+fetchData();
