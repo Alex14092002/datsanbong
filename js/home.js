@@ -128,3 +128,12 @@ function createScheduleTable(tab) {
   }
   
 fetchData();
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const btnDat = document.querySelectorAll('.btn-dat');
+  console.log(btnDat);
+});

@@ -1,740 +1,218 @@
 {
-  "tabs": {
-    "A": {
-      "name": "Khu A",
-      "courts": {
-        "A1": {
-          "name": "Sân A1",
-          "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
-            "5:00": { "status": "Chưa book" },
-            "5:30": { "status": "Chưa book" },
-            "6:00": { "status": "Chưa book" },
-            "6:30": { "status": "Chưa book" },
-            "7:00": { "status": "Chưa book" },
-            "7:30": { "status": "Chưa book" },
-            "8:00": { "status": "Chưa book" },
-            "8:30": { "status": "Chưa book" },
-            "9:00": { "status": "Chưa book" },
-            "9:30": { "status": "Chưa book" },
-            "10:00": { "status": "Chưa book" },
-            "10:30": { "status": "Chưa book" },
-            "11:00": { "status": "Chưa book" },
-            "11:30": { "status": "Chưa book" },
-            "12:00": { "status": "Chưa book" },
-            "12:30": { "status": "Chưa book" },
-            "13:00": { "status": "Chưa book" },
-            "13:30": { "status": "Chưa book" },
-            "14:00": { "status": "Chưa book" },
-            "14:30": { "status": "Chưa book" },
-            "15:00": { "status": "Chưa book" },
-            "15:30": { "status": "Chưa book" },
-            "16:00": { "status": "Chưa book" },
-            "16:30": { "status": "Chưa book" },
-            "17:00": { "status": "Chưa book" },
-            "17:30": { "status": "Chưa book" },
-            "18:00": { "status": "Chưa book" },
-            "18:30": { "status": "Chưa book" },
-            "19:00": { "status": "Chưa book" },
-            "19:30": { "status": "Chưa book" },
-            "20:00": { "status": "Chưa book" },
-            "20:30": { "status": "Chưa book" },
-            "21:00": { "status": "Chưa book" },
-            "21:30": { "status": "Chưa book" },
-            "22:00": { "status": "Chưa book" },
-            "22:30": { "status": "Chưa book" },
-            "23:00": { "status": "Chưa book" },
-            "23:30": { "status": "Chưa book" }
-          }
+  "blocks": {
+    "-Nc5c4AZJsaShIhcYiAc": {
+      "price": "30000",
+      "time": "4:30",
+      "listbook":{
+        "0":{
+          "status":"Đang chờ duyệt",
+          "user":"Nguyễn Văn A",
+          "san":"Sân A1"
         },
-        "A2": {
-          "name": "Sân A2",
-          "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
-            "5:00": { "status": "Chưa book" },
-            "5:30": { "status": "Chưa book" },
-            "6:00": { "status": "Chưa book" },
-            "6:30": { "status": "Chưa book" },
-            "7:00": { "status": "Chưa book" },
-            "7:30": { "status": "Chưa book" },
-            "8:00": { "status": "Chưa book" },
-            "8:30": { "status": "Chưa book" },
-            "9:00": { "status": "Chưa book" },
-            "9:30": { "status": "Chưa book" },
-            "10:00": { "status": "Chưa book" },
-            "10:30": { "status": "Chưa book" },
-            "11:00": { "status": "Chưa book" },
-            "11:30": { "status": "Chưa book" },
-            "12:00": { "status": "Chưa book" },
-            "12:30": { "status": "Chưa book" },
-            "13:00": { "status": "Chưa book" },
-            "13:30": { "status": "Chưa book" },
-            "14:00": { "status": "Chưa book" },
-            "14:30": { "status": "Chưa book" },
-            "15:00": { "status": "Chưa book" },
-            "15:30": { "status": "Chưa book" },
-            "16:00": { "status": "Chưa book" },
-            "16:30": { "status": "Chưa book" },
-            "17:00": { "status": "Chưa book" },
-            "17:30": { "status": "Chưa book" },
-            "18:00": { "status": "Chưa book" },
-            "18:30": { "status": "Chưa book" },
-            "19:00": { "status": "Chưa book" },
-            "19:30": { "status": "Chưa book" },
-            "20:00": { "status": "Chưa book" },
-            "20:30": { "status": "Chưa book" },
-            "21:00": { "status": "Chưa book" },
-            "21:30": { "status": "Chưa book" },
-            "22:00": { "status": "Chưa book" },
-            "22:30": { "status": "Chưa book" },
-            "23:00": { "status": "Chưa book" },
-            "23:30": { "status": "Chưa book" }
-          }
-        },
-        "A3": {
-          "name": "Sân A3",
-          "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
-            "5:00": { "status": "Chưa book" },
-            "5:30": { "status": "Chưa book" },
-            "6:00": { "status": "Chưa book" },
-            "6:30": { "status": "Chưa book" },
-            "7:00": { "status": "Chưa book" },
-            "7:30": { "status": "Chưa book" },
-            "8:00": { "status": "Chưa book" },
-            "8:30": { "status": "Chưa book" },
-            "9:00": { "status": "Chưa book" },
-            "9:30": { "status": "Chưa book" },
-            "10:00": { "status": "Chưa book" },
-            "10:30": { "status": "Chưa book" },
-            "11:00": { "status": "Chưa book" },
-            "11:30": { "status": "Chưa book" },
-            "12:00": { "status": "Chưa book" },
-            "12:30": { "status": "Chưa book" },
-            "13:00": { "status": "Chưa book" },
-            "13:30": { "status": "Chưa book" },
-            "14:00": { "status": "Chưa book" },
-            "14:30": { "status": "Chưa book" },
-            "15:00": { "status": "Chưa book" },
-            "15:30": { "status": "Chưa book" },
-            "16:00": { "status": "Chưa book" },
-            "16:30": { "status": "Chưa book" },
-            "17:00": { "status": "Chưa book" },
-            "17:30": { "status": "Chưa book" },
-            "18:00": { "status": "Chưa book" },
-            "18:30": { "status": "Chưa book" },
-            "19:00": { "status": "Chưa book" },
-            "19:30": { "status": "Chưa book" },
-            "20:00": { "status": "Chưa book" },
-            "20:30": { "status": "Chưa book" },
-            "21:00": { "status": "Chưa book" },
-            "21:30": { "status": "Chưa book" },
-            "22:00": { "status": "Chưa book" },
-            "22:30": { "status": "Chưa book" },
-            "23:00": { "status": "Chưa book" },
-            "23:30": { "status": "Chưa book" }
-          }
-        },
-        "A4": {
-          "name": "Sân A4",
-          "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
-            "5:00": { "status": "Chưa book" },
-            "5:30": { "status": "Chưa book" },
-            "6:00": { "status": "Chưa book" },
-            "6:30": { "status": "Chưa book" },
-            "7:00": { "status": "Chưa book" },
-            "7:30": { "status": "Chưa book" },
-            "8:00": { "status": "Chưa book" },
-            "8:30": { "status": "Chưa book" },
-            "9:00": { "status": "Chưa book" },
-            "9:30": { "status": "Chưa book" },
-            "10:00": { "status": "Chưa book" },
-            "10:30": { "status": "Chưa book" },
-            "11:00": { "status": "Chưa book" },
-            "11:30": { "status": "Chưa book" },
-            "12:00": { "status": "Chưa book" },
-            "12:30": { "status": "Chưa book" },
-            "13:00": { "status": "Chưa book" },
-            "13:30": { "status": "Chưa book" },
-            "14:00": { "status": "Chưa book" },
-            "14:30": { "status": "Chưa book" },
-            "15:00": { "status": "Chưa book" },
-            "15:30": { "status": "Chưa book" },
-            "16:00": { "status": "Chưa book" },
-            "16:30": { "status": "Chưa book" },
-            "17:00": { "status": "Chưa book" },
-            "17:30": { "status": "Chưa book" },
-            "18:00": { "status": "Chưa book" },
-            "18:30": { "status": "Chưa book" },
-            "19:00": { "status": "Chưa book" },
-            "19:30": { "status": "Chưa book" },
-            "20:00": { "status": "Chưa book" },
-            "20:30": { "status": "Chưa book" },
-            "21:00": { "status": "Chưa book" },
-            "21:30": { "status": "Chưa book" },
-            "22:00": { "status": "Chưa book" },
-            "22:30": { "status": "Chưa book" },
-            "23:00": { "status": "Chưa book" },
-            "23:30": { "status": "Chưa book" }
-          }
+        "1":{
+          "status":"Đang chờ duyệt",
+          "user":"Nguyễn Văn B",
+          "san":"Sân B1"
         }
       }
     },
-    "B": {
-      "name": "Khu B",
-      "courts": {
-        "B1": {
-          "name": "Sân B1",
-          "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
-            "5:00": { "status": "Chưa book" },
-            "5:30": { "status": "Chưa book" },
-            "6:00": { "status": "Chưa book" },
-            "6:30": { "status": "Chưa book" },
-            "7:00": { "status": "Chưa book" },
-            "7:30": { "status": "Chưa book" },
-            "8:00": { "status": "Chưa book" },
-            "8:30": { "status": "Chưa book" },
-            "9:00": { "status": "Chưa book" },
-            "9:30": { "status": "Chưa book" },
-            "10:00": { "status": "Chưa book" },
-            "10:30": { "status": "Chưa book" },
-            "11:00": { "status": "Chưa book" },
-            "11:30": { "status": "Chưa book" },
-            "12:00": { "status": "Chưa book" },
-            "12:30": { "status": "Chưa book" },
-            "13:00": { "status": "Chưa book" },
-            "13:30": { "status": "Chưa book" },
-            "14:00": { "status": "Chưa book" },
-            "14:30": { "status": "Chưa book" },
-            "15:00": { "status": "Chưa book" },
-            "15:30": { "status": "Chưa book" },
-            "16:00": { "status": "Chưa book" },
-            "16:30": { "status": "Chưa book" },
-            "17:00": { "status": "Chưa book" },
-            "17:30": { "status": "Chưa book" },
-            "18:00": { "status": "Chưa book" },
-            "18:30": { "status": "Chưa book" },
-            "19:00": { "status": "Chưa book" },
-            "19:30": { "status": "Chưa book" },
-            "20:00": { "status": "Chưa book" },
-            "20:30": { "status": "Chưa book" },
-            "21:00": { "status": "Chưa book" },
-            "21:30": { "status": "Chưa book" },
-            "22:00": { "status": "Chưa book" },
-            "22:30": { "status": "Chưa book" },
-            "23:00": { "status": "Chưa book" },
-            "23:30": { "status": "Chưa book" }
-          }
-        },
-        "B2": {
-          "name": "Sân B2",
-          "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
-            "5:00": { "status": "Chưa book" },
-            "5:30": { "status": "Chưa book" },
-            "6:00": { "status": "Chưa book" },
-            "6:30": { "status": "Chưa book" },
-            "7:00": { "status": "Chưa book" },
-            "7:30": { "status": "Chưa book" },
-            "8:00": { "status": "Chưa book" },
-            "8:30": { "status": "Chưa book" },
-            "9:00": { "status": "Chưa book" },
-            "9:30": { "status": "Chưa book" },
-            "10:00": { "status": "Chưa book" },
-            "10:30": { "status": "Chưa book" },
-            "11:00": { "status": "Chưa book" },
-            "11:30": { "status": "Chưa book" },
-            "12:00": { "status": "Chưa book" },
-            "12:30": { "status": "Chưa book" },
-            "13:00": { "status": "Chưa book" },
-            "13:30": { "status": "Chưa book" },
-            "14:00": { "status": "Chưa book" },
-            "14:30": { "status": "Chưa book" },
-            "15:00": { "status": "Chưa book" },
-            "15:30": { "status": "Chưa book" },
-            "16:00": { "status": "Chưa book" },
-            "16:30": { "status": "Chưa book" },
-            "17:00": { "status": "Chưa book" },
-            "17:30": { "status": "Chưa book" },
-            "18:00": { "status": "Chưa book" },
-            "18:30": { "status": "Chưa book" },
-            "19:00": { "status": "Chưa book" },
-            "19:30": { "status": "Chưa book" },
-            "20:00": { "status": "Chưa book" },
-            "20:30": { "status": "Chưa book" },
-            "21:00": { "status": "Chưa book" },
-            "21:30": { "status": "Chưa book" },
-            "22:00": { "status": "Chưa book" },
-            "22:30": { "status": "Chưa book" },
-            "23:00": { "status": "Chưa book" },
-            "23:30": { "status": "Chưa book" }
-          }
-        },
-        "B3": {
-          "name": "Sân B3",
-          "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
-            "5:00": { "status": "Chưa book" },
-            "5:30": { "status": "Chưa book" },
-            "6:00": { "status": "Chưa book" },
-            "6:30": { "status": "Chưa book" },
-            "7:00": { "status": "Chưa book" },
-            "7:30": { "status": "Chưa book" },
-            "8:00": { "status": "Chưa book" },
-            "8:30": { "status": "Chưa book" },
-            "9:00": { "status": "Chưa book" },
-            "9:30": { "status": "Chưa book" },
-            "10:00": { "status": "Chưa book" },
-            "10:30": { "status": "Chưa book" },
-            "11:00": { "status": "Chưa book" },
-            "11:30": { "status": "Chưa book" },
-            "12:00": { "status": "Chưa book" },
-            "12:30": { "status": "Chưa book" },
-            "13:00": { "status": "Chưa book" },
-            "13:30": { "status": "Chưa book" },
-            "14:00": { "status": "Chưa book" },
-            "14:30": { "status": "Chưa book" },
-            "15:00": { "status": "Chưa book" },
-            "15:30": { "status": "Chưa book" },
-            "16:00": { "status": "Chưa book" },
-            "16:30": { "status": "Chưa book" },
-            "17:00": { "status": "Chưa book" },
-            "17:30": { "status": "Chưa book" },
-            "18:00": { "status": "Chưa book" },
-            "18:30": { "status": "Chưa book" },
-            "19:00": { "status": "Chưa book" },
-            "19:30": { "status": "Chưa book" },
-            "20:00": { "status": "Chưa book" },
-            "20:30": { "status": "Chưa book" },
-            "21:00": { "status": "Chưa book" },
-            "21:30": { "status": "Chưa book" },
-            "22:00": { "status": "Chưa book" },
-            "22:30": { "status": "Chưa book" },
-            "23:00": { "status": "Chưa book" },
-            "23:30": { "status": "Chưa book" }
-          }
-        },
-        "B4": {
-          "name": "Sân B4",
-          "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
-            "5:00": { "status": "Chưa book" },
-            "5:30": { "status": "Chưa book" },
-            "6:00": { "status": "Chưa book" },
-            "6:30": { "status": "Chưa book" },
-            "7:00": { "status": "Chưa book" },
-            "7:30": { "status": "Chưa book" },
-            "8:00": { "status": "Chưa book" },
-            "8:30": { "status": "Chưa book" },
-            "9:00": { "status": "Chưa book" },
-            "9:30": { "status": "Chưa book" },
-            "10:00": { "status": "Chưa book" },
-            "10:30": { "status": "Chưa book" },
-            "11:00": { "status": "Chưa book" },
-            "11:30": { "status": "Chưa book" },
-            "12:00": { "status": "Chưa book" },
-            "12:30": { "status": "Chưa book" },
-            "13:00": { "status": "Chưa book" },
-            "13:30": { "status": "Chưa book" },
-            "14:00": { "status": "Chưa book" },
-            "14:30": { "status": "Chưa book" },
-            "15:00": { "status": "Chưa book" },
-            "15:30": { "status": "Chưa book" },
-            "16:00": { "status": "Chưa book" },
-            "16:30": { "status": "Chưa book" },
-            "17:00": { "status": "Chưa book" },
-            "17:30": { "status": "Chưa book" },
-            "18:00": { "status": "Chưa book" },
-            "18:30": { "status": "Chưa book" },
-            "19:00": { "status": "Chưa book" },
-            "19:30": { "status": "Chưa book" },
-            "20:00": { "status": "Chưa book" },
-            "20:30": { "status": "Chưa book" },
-            "21:00": { "status": "Chưa book" },
-            "21:30": { "status": "Chưa book" },
-            "22:00": { "status": "Chưa book" },
-            "22:30": { "status": "Chưa book" },
-            "23:00": { "status": "Chưa book" },
-            "23:30": { "status": "Chưa book" }
-          }
+    "-Nc5cXo46XVeho6kt10Y": {
+      "price": "3000000",
+      "time": "5:00",
+      "listbook":{
+        "0":{
+          "status":"Đang chờ duyệt",
+          "user":"Nguyễn Văn C",
+          "san":"Sân C2"
         }
       }
     },
-    "C": {
-      "name": "Khu C",
-      "courts": {
-        "C1": {
-          "name": "Sân C1",
-          "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
-            "5:00": { "status": "Chưa book" },
-            "5:30": { "status": "Chưa book" },
-            "6:00": { "status": "Chưa book" },
-            "6:30": { "status": "Chưa book" },
-            "7:00": { "status": "Chưa book" },
-            "7:30": { "status": "Chưa book" },
-            "8:00": { "status": "Chưa book" },
-            "8:30": { "status": "Chưa book" },
-            "9:00": { "status": "Chưa book" },
-            "9:30": { "status": "Chưa book" },
-            "10:00": { "status": "Chưa book" },
-            "10:30": { "status": "Chưa book" },
-            "11:00": { "status": "Chưa book" },
-            "11:30": { "status": "Chưa book" },
-            "12:00": { "status": "Chưa book" },
-            "12:30": { "status": "Chưa book" },
-            "13:00": { "status": "Chưa book" },
-            "13:30": { "status": "Chưa book" },
-            "14:00": { "status": "Chưa book" },
-            "14:30": { "status": "Chưa book" },
-            "15:00": { "status": "Chưa book" },
-            "15:30": { "status": "Chưa book" },
-            "16:00": { "status": "Chưa book" },
-            "16:30": { "status": "Chưa book" },
-            "17:00": { "status": "Chưa book" },
-            "17:30": { "status": "Chưa book" },
-            "18:00": { "status": "Chưa book" },
-            "18:30": { "status": "Chưa book" },
-            "19:00": { "status": "Chưa book" },
-            "19:30": { "status": "Chưa book" },
-            "20:00": { "status": "Chưa book" },
-            "20:30": { "status": "Chưa book" },
-            "21:00": { "status": "Chưa book" },
-            "21:30": { "status": "Chưa book" },
-            "22:00": { "status": "Chưa book" },
-            "22:30": { "status": "Chưa book" },
-            "23:00": { "status": "Chưa book" },
-            "23:30": { "status": "Chưa book" }
-          }
-        },
-        "C2": {
-          "name": "Sân C2",
-          "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
-            "5:00": { "status": "Chưa book" },
-            "5:30": { "status": "Chưa book" },
-            "6:00": { "status": "Chưa book" },
-            "6:30": { "status": "Chưa book" },
-            "7:00": { "status": "Chưa book" },
-            "7:30": { "status": "Chưa book" },
-            "8:00": { "status": "Chưa book" },
-            "8:30": { "status": "Chưa book" },
-            "9:00": { "status": "Chưa book" },
-            "9:30": { "status": "Chưa book" },
-            "10:00": { "status": "Chưa book" },
-            "10:30": { "status": "Chưa book" },
-            "11:00": { "status": "Chưa book" },
-            "11:30": { "status": "Chưa book" },
-            "12:00": { "status": "Chưa book" },
-            "12:30": { "status": "Chưa book" },
-            "13:00": { "status": "Chưa book" },
-            "13:30": { "status": "Chưa book" },
-            "14:00": { "status": "Chưa book" },
-            "14:30": { "status": "Chưa book" },
-            "15:00": { "status": "Chưa book" },
-            "15:30": { "status": "Chưa book" },
-            "16:00": { "status": "Chưa book" },
-            "16:30": { "status": "Chưa book" },
-            "17:00": { "status": "Chưa book" },
-            "17:30": { "status": "Chưa book" },
-            "18:00": { "status": "Chưa book" },
-            "18:30": { "status": "Chưa book" },
-            "19:00": { "status": "Chưa book" },
-            "19:30": { "status": "Chưa book" },
-            "20:00": { "status": "Chưa book" },
-            "20:30": { "status": "Chưa book" },
-            "21:00": { "status": "Chưa book" },
-            "21:30": { "status": "Chưa book" },
-            "22:00": { "status": "Chưa book" },
-            "22:30": { "status": "Chưa book" },
-            "23:00": { "status": "Chưa book" },
-            "23:30": { "status": "Chưa book" }
-          }
-        },
-        "C3": {
-          "name": "Sân C3",
-          "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
-            "5:00": { "status": "Chưa book" },
-            "5:30": { "status": "Chưa book" },
-            "6:00": { "status": "Chưa book" },
-            "6:30": { "status": "Chưa book" },
-            "7:00": { "status": "Chưa book" },
-            "7:30": { "status": "Chưa book" },
-            "8:00": { "status": "Chưa book" },
-            "8:30": { "status": "Chưa book" },
-            "9:00": { "status": "Chưa book" },
-            "9:30": { "status": "Chưa book" },
-            "10:00": { "status": "Chưa book" },
-            "10:30": { "status": "Chưa book" },
-            "11:00": { "status": "Chưa book" },
-            "11:30": { "status": "Chưa book" },
-            "12:00": { "status": "Chưa book" },
-            "12:30": { "status": "Chưa book" },
-            "13:00": { "status": "Chưa book" },
-            "13:30": { "status": "Chưa book" },
-            "14:00": { "status": "Chưa book" },
-            "14:30": { "status": "Chưa book" },
-            "15:00": { "status": "Chưa book" },
-            "15:30": { "status": "Chưa book" },
-            "16:00": { "status": "Chưa book" },
-            "16:30": { "status": "Chưa book" },
-            "17:00": { "status": "Chưa book" },
-            "17:30": { "status": "Chưa book" },
-            "18:00": { "status": "Chưa book" },
-            "18:30": { "status": "Chưa book" },
-            "19:00": { "status": "Chưa book" },
-            "19:30": { "status": "Chưa book" },
-            "20:00": { "status": "Chưa book" },
-            "20:30": { "status": "Chưa book" },
-            "21:00": { "status": "Chưa book" },
-            "21:30": { "status": "Chưa book" },
-            "22:00": { "status": "Chưa book" },
-            "22:30": { "status": "Chưa book" },
-            "23:00": { "status": "Chưa book" },
-            "23:30": { "status": "Chưa book" }
-          }
-        },
-        "C4": {
-          "name": "Sân C4",
-          "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
-            "5:00": { "status": "Chưa book" },
-            "5:30": { "status": "Chưa book" },
-            "6:00": { "status": "Chưa book" },
-            "6:30": { "status": "Chưa book" },
-            "7:00": { "status": "Chưa book" },
-            "7:30": { "status": "Chưa book" },
-            "8:00": { "status": "Chưa book" },
-            "8:30": { "status": "Chưa book" },
-            "9:00": { "status": "Chưa book" },
-            "9:30": { "status": "Chưa book" },
-            "10:00": { "status": "Chưa book" },
-            "10:30": { "status": "Chưa book" },
-            "11:00": { "status": "Chưa book" },
-            "11:30": { "status": "Chưa book" },
-            "12:00": { "status": "Chưa book" },
-            "12:30": { "status": "Chưa book" },
-            "13:00": { "status": "Chưa book" },
-            "13:30": { "status": "Chưa book" },
-            "14:00": { "status": "Chưa book" },
-            "14:30": { "status": "Chưa book" },
-            "15:00": { "status": "Chưa book" },
-            "15:30": { "status": "Chưa book" },
-            "16:00": { "status": "Chưa book" },
-            "16:30": { "status": "Chưa book" },
-            "17:00": { "status": "Chưa book" },
-            "17:30": { "status": "Chưa book" },
-            "18:00": { "status": "Chưa book" },
-            "18:30": { "status": "Chưa book" },
-            "19:00": { "status": "Chưa book" },
-            "19:30": { "status": "Chưa book" },
-            "20:00": { "status": "Chưa book" },
-            "20:30": { "status": "Chưa book" },
-            "21:00": { "status": "Chưa book" },
-            "21:30": { "status": "Chưa book" },
-            "22:00": { "status": "Chưa book" },
-            "22:30": { "status": "Chưa book" },
-            "23:00": { "status": "Chưa book" },
-            "23:30": { "status": "Chưa book" }
-          }
-        }
-      }
+    "-Nc5c_gI_Nq61NWsFa5D": {
+      "price": "50000000",
+      "time": "5:30"
     },
-    "D": {
-      "name": "Khu D",
-      "courts": {
-        "D1": {
-          "name": "Sân D1",
-          "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
-            "5:00": { "status": "Chưa book" },
-            "5:30": { "status": "Chưa book" },
-            "6:00": { "status": "Chưa book" },
-            "6:30": { "status": "Chưa book" },
-            "7:00": { "status": "Chưa book" },
-            "7:30": { "status": "Chưa book" },
-            "8:00": { "status": "Chưa book" },
-            "8:30": { "status": "Chưa book" },
-            "9:00": { "status": "Chưa book" },
-            "9:30": { "status": "Chưa book" },
-            "10:00": { "status": "Chưa book" },
-            "10:30": { "status": "Chưa book" },
-            "11:00": { "status": "Chưa book" },
-            "11:30": { "status": "Chưa book" },
-            "12:00": { "status": "Chưa book" },
-            "12:30": { "status": "Chưa book" },
-            "13:00": { "status": "Chưa book" },
-            "13:30": { "status": "Chưa book" },
-            "14:00": { "status": "Chưa book" },
-            "14:30": { "status": "Chưa book" },
-            "15:00": { "status": "Chưa book" },
-            "15:30": { "status": "Chưa book" },
-            "16:00": { "status": "Chưa book" },
-            "16:30": { "status": "Chưa book" },
-            "17:00": { "status": "Chưa book" },
-            "17:30": { "status": "Chưa book" },
-            "18:00": { "status": "Chưa book" },
-            "18:30": { "status": "Chưa book" },
-            "19:00": { "status": "Chưa book" },
-            "19:30": { "status": "Chưa book" },
-            "20:00": { "status": "Chưa book" },
-            "20:30": { "status": "Chưa book" },
-            "21:00": { "status": "Chưa book" },
-            "21:30": { "status": "Chưa book" },
-            "22:00": { "status": "Chưa book" },
-            "22:30": { "status": "Chưa book" },
-            "23:00": { "status": "Chưa book" },
-            "23:30": { "status": "Chưa book" }
-          }
-        },
-        "D2": {
-          "name": "Sân D2",
-          "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
-            "5:00": { "status": "Chưa book" },
-            "5:30": { "status": "Chưa book" },
-            "6:00": { "status": "Chưa book" },
-            "6:30": { "status": "Chưa book" },
-            "7:00": { "status": "Chưa book" },
-            "7:30": { "status": "Chưa book" },
-            "8:00": { "status": "Chưa book" },
-            "8:30": { "status": "Chưa book" },
-            "9:00": { "status": "Chưa book" },
-            "9:30": { "status": "Chưa book" },
-            "10:00": { "status": "Chưa book" },
-            "10:30": { "status": "Chưa book" },
-            "11:00": { "status": "Chưa book" },
-            "11:30": { "status": "Chưa book" },
-            "12:00": { "status": "Chưa book" },
-            "12:30": { "status": "Chưa book" },
-            "13:00": { "status": "Chưa book" },
-            "13:30": { "status": "Chưa book" },
-            "14:00": { "status": "Chưa book" },
-            "14:30": { "status": "Chưa book" },
-            "15:00": { "status": "Chưa book" },
-            "15:30": { "status": "Chưa book" },
-            "16:00": { "status": "Chưa book" },
-            "16:30": { "status": "Chưa book" },
-            "17:00": { "status": "Chưa book" },
-            "17:30": { "status": "Chưa book" },
-            "18:00": { "status": "Chưa book" },
-            "18:30": { "status": "Chưa book" },
-            "19:00": { "status": "Chưa book" },
-            "19:30": { "status": "Chưa book" },
-            "20:00": { "status": "Chưa book" },
-            "20:30": { "status": "Chưa book" },
-            "21:00": { "status": "Chưa book" },
-            "21:30": { "status": "Chưa book" },
-            "22:00": { "status": "Chưa book" },
-            "22:30": { "status": "Chưa book" },
-            "23:00": { "status": "Chưa book" },
-            "23:30": { "status": "Chưa book" }
-          }
-        },
-        "D3": {
-          "name": "Sân D3",
-          "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
-            "5:00": { "status": "Chưa book" },
-            "5:30": { "status": "Chưa book" },
-            "6:00": { "status": "Chưa book" },
-            "6:30": { "status": "Chưa book" },
-            "7:00": { "status": "Chưa book" },
-            "7:30": { "status": "Chưa book" },
-            "8:00": { "status": "Chưa book" },
-            "8:30": { "status": "Chưa book" },
-            "9:00": { "status": "Chưa book" },
-            "9:30": { "status": "Chưa book" },
-            "10:00": { "status": "Chưa book" },
-            "10:30": { "status": "Chưa book" },
-            "11:00": { "status": "Chưa book" },
-            "11:30": { "status": "Chưa book" },
-            "12:00": { "status": "Chưa book" },
-            "12:30": { "status": "Chưa book" },
-            "13:00": { "status": "Chưa book" },
-            "13:30": { "status": "Chưa book" },
-            "14:00": { "status": "Chưa book" },
-            "14:30": { "status": "Chưa book" },
-            "15:00": { "status": "Chưa book" },
-            "15:30": { "status": "Chưa book" },
-            "16:00": { "status": "Chưa book" },
-            "16:30": { "status": "Chưa book" },
-            "17:00": { "status": "Chưa book" },
-            "17:30": { "status": "Chưa book" },
-            "18:00": { "status": "Chưa book" },
-            "18:30": { "status": "Chưa book" },
-            "19:00": { "status": "Chưa book" },
-            "19:30": { "status": "Chưa book" },
-            "20:00": { "status": "Chưa book" },
-            "20:30": { "status": "Chưa book" },
-            "21:00": { "status": "Chưa book" },
-            "21:30": { "status": "Chưa book" },
-            "22:00": { "status": "Chưa book" },
-            "22:30": { "status": "Chưa book" },
-            "23:00": { "status": "Chưa book" },
-            "23:30": { "status": "Chưa book" }
-          }
-        },
-        "D4": {
-          "name": "Sân D4",
-          "schedule": {
-            "4:00": { "status": "Đã book", "groupId": "group123" , "level" : "low" },
-            "5:00": { "status": "Chưa book" },
-            "5:30": { "status": "Chưa book" },
-            "6:00": { "status": "Chưa book" },
-            "6:30": { "status": "Chưa book" },
-            "7:00": { "status": "Chưa book" },
-            "7:30": { "status": "Chưa book" },
-            "8:00": { "status": "Chưa book" },
-            "8:30": { "status": "Chưa book" },
-            "9:00": { "status": "Chưa book" },
-            "9:30": { "status": "Chưa book" },
-            "10:00": { "status": "Chưa book" },
-            "10:30": { "status": "Chưa book" },
-            "11:00": { "status": "Chưa book" },
-            "11:30": { "status": "Chưa book" },
-            "12:00": { "status": "Chưa book" },
-            "12:30": { "status": "Chưa book" },
-            "13:00": { "status": "Chưa book" },
-            "13:30": { "status": "Chưa book" },
-            "14:00": { "status": "Chưa book" },
-            "14:30": { "status": "Chưa book" },
-            "15:00": { "status": "Chưa book" },
-            "15:30": { "status": "Chưa book" },
-            "16:00": { "status": "Chưa book" },
-            "16:30": { "status": "Chưa book" },
-            "17:00": { "status": "Chưa book" },
-            "17:30": { "status": "Chưa book" },
-            "18:00": { "status": "Chưa book" },
-            "18:30": { "status": "Chưa book" },
-            "19:00": { "status": "Chưa book" },
-            "19:30": { "status": "Chưa book" },
-            "20:00": { "status": "Chưa book" },
-            "20:30": { "status": "Chưa book" },
-            "21:00": { "status": "Chưa book" },
-            "21:30": { "status": "Chưa book" },
-            "22:00": { "status": "Chưa book" },
-            "22:30": { "status": "Chưa book" },
-            "23:00": { "status": "Chưa book" },
-            "23:30": { "status": "Chưa book" }
-          }
-        }
-      }
+    "-Nc7AMzF0al4kvU8HDRu": {
+      "price": "2000000",
+      "time": "6:00"
     }
   },
-  "groups": {
-    "group123": {
-      "name": "Nhóm A",
-      "public": true,
-      "level": "beginner"
+  "khu": {
+    "0": {
+      "sân": {
+        "0": {
+          "blockItem": {
+            "-Nc5c4L87-WWoaZYGKOG": {
+              "price": "30000",
+              "status": "Đã book",
+              "time": "4:30"
+            },
+            "-Nc5cXyg1Fpvi55DkbVe": {
+              "price": "3000000",
+              "status": "Trống",
+              "time": "5:00"
+            },
+            "-Nc5c_qoXSMNEb5ewSzb": {
+              "price": "50000000",
+              "status": "Trống",
+              "time": "5:30"
+            },
+            "-Nc7AN7sPqShRF2-JDKX": {
+              "price": "2000000",
+              "status": "Trống",
+              "time": "6:00"
+            }
+          },
+          "ten": "Sân A1"
+        },
+        "1": {
+          "blockItem": {
+            "-Nc5c4S2GKL0vWEP6u31": {
+              "price": "30000",
+              "status": "Trống",
+              "time": "4:30"
+            },
+            "-Nc5cY5StDrNELyoFQPl": {
+              "price": "3000000",
+              "status": "Trống",
+              "time": "5:00"
+            },
+            "-Nc5c_xngUnqEIony_Mf": {
+              "price": "50000000",
+              "status": "Trống",
+              "time": "5:30"
+            },
+            "-Nc7ANEFUcdYvyKFl7yr": {
+              "price": "2000000",
+              "status": "Trống",
+              "time": "6:00"
+            }
+          },
+          "ten": "Sân A2"
+        },
+        "-Nc7CghTkke4Mvjb3hzz": {
+          "ten": "Sân A3"
+        },
+        "-Nc7Ci4GWLRIUwro0IPj": {
+          "ten": "Sân A4"
+        }
+      },
+      "ten": "Khu A"
     },
-    "group456": {
-      "name": "Nhóm B",
-      "public": false,
-      "level": "intermediate"
+    "1": {
+      "sân": {
+        "0": {
+          "blockItem": {
+            "-Nc5c4exx879Lz7S21XZ": {
+              "price": "30000",
+              "status": "Trống",
+              "time": "4:30"
+            },
+            "-Nc5cYRuNfE6xJRP9Mce": {
+              "price": "3000000",
+              "status": "Trống",
+              "time": "5:00"
+            },
+            "-Nc5caHgRWbqBT4sF-Tj": {
+              "price": "50000000",
+              "status": "Trống",
+              "time": "5:30"
+            },
+            "-Nc7ANccdO3ZrDCxd_2z": {
+              "price": "2000000",
+              "status": "Trống",
+              "time": "6:00"
+            }
+          },
+          "ten": "Sân B1"
+        },
+        "1": {
+          "blockItem": {
+            "-Nc5c4ltS_TMX05RRLxA": {
+              "price": "30000",
+              "status": "Trống",
+              "time": "4:30"
+            },
+            "-Nc5cYZP6dz3ljuRlCh7": {
+              "price": "3000000",
+              "status": "Trống",
+              "time": "5:00"
+            },
+            "-Nc5caOgttrJnGLoQsL3": {
+              "price": "50000000",
+              "status": "Trống",
+              "time": "5:30"
+            },
+            "-Nc7ANj0QOez4932X87J": {
+              "price": "2000000",
+              "status": "Trống",
+              "time": "6:00"
+            }
+          },
+          "ten": "Sân B2"
+        },
+        "-Nc5bz21wxTl9_EPEO1O": {
+          "blockItem": {
+            "-Nc5c4sw5Og2JPwKOVlf": {
+              "price": "30000",
+              "status": "Trống",
+              "time": "4:30"
+            },
+            "-Nc5cYfyojF4ienRIT_b": {
+              "price": "3000000",
+              "status": "Trống",
+              "time": "5:00"
+            },
+            "-Nc5caVfSjH9o1cZ52i0": {
+              "price": "50000000",
+              "status": "Trống",
+              "time": "5:30"
+            },
+            "-Nc7ANpUJNsnUByJg272": {
+              "price": "2000000",
+              "status": "Trống",
+              "time": "6:00"
+            }
+          },
+          "ten": "Sân B3"
+        },
+        "-Nc7C25KUcQRtGFdUl1m": {
+          "ten": "Sân B4"
+        }
+      },
+      "ten": "Khu B"
+    },
+    "-Nc5dM_IUJDDcl5wBWvv": {
+      "sân": {
+        "-Nc5dPoLBOXPkIh3BKI7": {
+          "blockItem": {
+            "-Nc5c4AZJsaShIhcYiAc": {
+              "price": "30000",
+              "status": "Trống",
+              "time": "4:30"
+            },
+            "-Nc5cXo46XVeho6kt10Y": {
+              "price": "3000000",
+              "status": "Trống",
+              "time": "5:00"
+            },
+            "-Nc5c_gI_Nq61NWsFa5D": {
+              "price": "50000000",
+              "status": "Trống",
+              "time": "5:30"
+            },
+            "-Nc7ANvqSa9JxJXF4ff7": {
+              "price": "2000000",
+              "status": "Trống",
+              "time": "6:00"
+            }
+          },
+          "ten": "Sân C1"
+        },
+        "-Nc7C5hQ8lVVYl0rEQkK": {
+          "ten": "Sân C2"
+        }
+      },
+      "ten": "Khu C"
     }
   }
 }

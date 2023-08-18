@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Thêm khu mới</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1>Thêm khu mới</h1>
+    <form id="addKhuForm">
+      <div class="mb-3">
+        <label for="tenKhu" class="form-label">Tên khu:</label>
+        <input type="text" class="form-control" id="tenKhu" name="tenKhu" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Thêm khu</button>
+    </form>
+  </div>
+
+  <script>
+    const databaseURL = "https://sancaul-default-rtdb.firebaseio.com"; // Thay bằng URL của Firebase Realtime Database
+
+    const addKhuForm = document.getElementById("addKhuForm");
+
+    addKhuForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(addKhuForm);
+      const tenKhu = formData.get("tenKhu");
+
+      if (tenKhu) {
+        fetch(`${databaseURL}/khu.json`, {
+          method: "POST",
+          body: JSON.stringify({
+            ten: tenKhu,
+            sân: {}
+          }),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log("Khu đã được thêm:", data);
+          alert("Thêm khu thành công!");
+          window.location.href = "index.html"; // Quay trở lại trang index sau khi thêm khu
+        })
+        .catch(error => {
+          console.error("Lỗi khi thêm khu:", error);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

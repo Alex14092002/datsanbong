@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Quản trị sân bóng</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  </head>
+  <style>
+    .booked {
+      background-color: red !important;
+      color: #fff;
+    }
+    .not-booked {
+      background-color: yellow !important;
+    }
+  </style>
+  <body>
+    <div id="app" class="container">
+      <h1>Quản trị sân bóng</h1>
+      <div class="btn-main py-4">
+        <a class="btn btn-primary" href="add_block.html">Thêm block</a>
+        <a class="btn btn-primary" href="add_khu.html">Thêm khu</a>
+      </div>
+
+      <div class="nav nav-pills mb-3" id="pills-tab" role="tablist"></div>
+      <div class="tab-content" id="pills-tabContent"></div>
+    </div>
+    <div
+      class="modal fade"
+      id="updateBookingModal"
+      tabindex="-1"
+      aria-labelledby="updateBookingModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="updateBookingModalLabel">
+              Cập nhật trạng thái đặt sân
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <select class="form-select" id="bookingStatusSelect">
+              <option value="booked">Đã đặt</option>
+              <option value="canceled">Đã hủy</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Đóng
+            </button>
+            <button type="button" class="btn btn-primary" id="updateBookingBtn">
+              Lưu
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      function formatCurrency(amount) {
+      const formatter = new Intl.NumberFormat("vi-VN", {
+        style: "currency",
+        currency: "VND",
+      });
+      return formatter.format(amount);
+    }
+
+    const databaseURL = "https://sancaul-default-rtdb.firebaseio.com";
+    const tabContainer = document.getElementById("pills-tab");
+    const contentContainer = document.getElementById("pills-tabContent");
+    const updateBookingModal = new bootstrap.Modal(
+      document.getElementById("updateBookingModal")
+    );
+    const bookingStatusSelect = document.getElementById(
+      "bookingStatusSelect"
+    );
+    const updateBookingBtn = document.getElementById("updateBookingBtn");
+    let selectedBlockCell = null;
+
+    function openUpdateBookingModal(blockCell) {
+      selectedBlockCell = blockCell;
+      updateBookingModal.show();
+    }
+
+    updateBookingBtn.addEventListener("click", () => {
+      if (selectedBlockCell) {
+        const newStatus = bookingStatusSelect.value;
+        const khuId = selectedBlockCell.getAttribute("data-khuid");
+        const sanId = selectedBlockCell.getAttribute("data-sanid");
+        const blockId = selectedBlockCell.getAttribute("data-blockid");
+
+        if (newStatus === "booked") {
+          const updateStatusPromise = fetch(
+            `${databaseURL}/blocks/${blockId}/listbook.json`
+          )
+            .then((response) => response.json())
+            .then((listbook) => {
+              const updatedListbook = listbook.map((booking) => {
+                if (booking.khuid === khuId && booking.sanid === sanId) {
+                  booking.status = newStatus;
+                }
+                return booking;
+              });
+
+              return fetch(`${databaseURL}/blocks/${blockId}/listbook.json`, {
+                method: "PUT",
+                body: JSON.stringify(updatedListbook),
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              });
+            });
+
+          updateStatusPromise.then(() => {
+            selectedBlockCell.textContent = newStatus;
+            selectedBlockCell.classList.remove("not-booked", "booked");
+            selectedBlockCell.classList.add(
+              newStatus === "booked" ? "booked" : "not-booked"
+            );
+            updateBookingModal.hide();
+            selectedBlockCell = null;
+          });
+        } else if (newStatus === "canceled") {
+          const removeBookingPromise = fetch(
+            `${databaseURL}/blocks/${blockId}/listbook.json`
+          )
+            .then((response) => response.json())
+            .then((listbook) => {
+              const updatedListbook = listbook.filter(
+                (booking) => !(booking.khuid === khuId && booking.sanid === sanId)
+              );
+
+              return fetch(`${databaseURL}/blocks/${blockId}/listbook.json`, {
+                method: "PUT",
+                body: JSON.stringify(updatedListbook),
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              });
+            });
+
+          removeBookingPromise.then(() => {
+            updateBookingModal.hide();
+            selectedBlockCell.parentElement.removeChild(selectedBlockCell);
+            selectedBlockCell = null;
+          });
+        }
+      }
+    });
+
+      function displayTableForKhu(khuId) {
+        const tabPane = document.getElementById(`khu-${khuId}`);
+        const table = document.createElement("table");
+        table.classList.add("table", "table-bordered");
+        tabPane.appendChild(table);
+
+        // Lấy danh sách các block
+        fetch(`${databaseURL}/khu/${khuId}/sân.json`)
+          .then((response) => response.json())
+          .then((data) => {
+            // Tạo thead với các cột
+            const thead = document.createElement("thead");
+            const theadRow = document.createElement("tr");
+            const timeHeader = document.createElement("th");
+            timeHeader.scope = "col";
+            timeHeader.textContent = "Thời gian";
+            theadRow.appendChild(timeHeader);
+
+            for (const sanId in data) {
+              const san = data[sanId];
+              const blockHeader = document.createElement("th");
+              blockHeader.scope = "col";
+              blockHeader.textContent = san.ten;
+              theadRow.appendChild(blockHeader);
+            }
+            thead.appendChild(theadRow);
+            table.appendChild(thead);
+
+            // Lấy danh sách các sân cho khu
+            fetch(`${databaseURL}/blocks.json`)
+              .then((response) => response.json())
+              .then((blocks) => {
+                // Tạo tbody với các hàng
+                const tbody = document.createElement("tbody");
+                for (const blockId in blocks) {
+                  const block = blocks[blockId];
+                  const sanRow = document.createElement("tr");
+                  const sanNameCell = document.createElement("td");
+                  sanNameCell.textContent =
+                    block.time + "-" + formatCurrency(block.price);
+                  sanRow.appendChild(sanNameCell);
+
+                  for (const sanId in data) {
+                    const blockCell = document.createElement("td");
+                    sanRow.appendChild(blockCell);
+
+                    const san = data[sanId];
+                    if (block.listbook) {
+                      const bookedSan = block.listbook.find(
+                        (booked) => booked.san === san.ten
+                      );
+                      if (bookedSan) {
+                        blockCell.textContent =
+                          bookedSan.status + " - " + bookedSan.user;
+
+                        blockCell.classList.add("booked");
+                        blockCell.setAttribute("data-khuid", khuId);
+                        blockCell.setAttribute("data-sanid", sanId);
+                        blockCell.setAttribute("data-blockid", blockId);
+                        const button = document.createElement("button");
+                        button.textContent = "Cập nhật";
+                        button.classList.add("btn", "btn-sm", "btn-primary" , "m-2");
+                        button.addEventListener("click", () => {
+                          openUpdateBookingModal(blockCell);
+                        });
+                        blockCell.appendChild(button)
+                      } else {
+                        blockCell.textContent = "Trống";
+                        blockCell.classList.add("not-booked");
+                      }
+                    } else {
+                      blockCell.textContent = "Trống";
+                      blockCell.classList.add("not-booked");
+                    }
+                  }
+
+                  tbody.appendChild(sanRow);
+                }
+                table.appendChild(tbody);
+              })
+              .catch((error) => {
+                console.error("Lỗi khi tải danh sách sân:", error);
+              });
+          })
+          .catch((error) => {
+            console.error("Lỗi khi tải danh sách block:", error);
+          });
+      }
+
+      fetch(`${databaseURL}/khu.json`)
+        .then((response) => response.json())
+        .then((data) => {
+          let firstKhuId = null;
+
+          for (const khuId in data) {
+            const khu = data[khuId];
+
+            if (!firstKhuId) {
+              firstKhuId = khuId;
+            }
+
+            const tabLink = document.createElement("button");
+            tabLink.classList.add("nav-link");
+            tabLink.textContent = khu.ten;
+            tabLink.setAttribute("data-bs-toggle", "pill");
+            tabLink.setAttribute("data-bs-target", `#khu-${khuId}`);
+            tabLink.setAttribute("role", "tab");
+            tabLink.setAttribute("aria-controls", `khu-${khuId}`);
+            tabLink.setAttribute("aria-selected", "false");
+            tabContainer.appendChild(tabLink);
+
+            const tabPane = document.createElement("div");
+            tabPane.classList.add("tab-pane", "fade");
+            tabPane.id = `khu-${khuId}`;
+            tabPane.setAttribute("role", "tabpanel");
+            tabPane.setAttribute("aria-labelledby", `khu-${khuId}-tab`);
+            contentContainer.appendChild(tabPane);
+
+            displayTableForKhu(khuId);
+
+            const manageSanButton = document.createElement("button");
+            manageSanButton.textContent = "Quản lý sân";
+            manageSanButton.classList.add("btn", "btn-primary", "mb-3");
+            manageSanButton.addEventListener("click", () => {
+              window.location.href = `manage_san.html?khuId=${khuId}`;
+            });
+            tabPane.appendChild(manageSanButton);
+          }
+
+          const firstTabLink = document.querySelector(
+            `[data-bs-target="#khu-${firstKhuId}"]`
+          );
+          const firstTabPane = document.getElementById(`khu-${firstKhuId}`);
+
+          if (firstTabLink && firstTabPane) {
+            firstTabLink.classList.add("active");
+            firstTabPane.classList.add("show", "active");
+          }
+        })
+        .catch((error) => {
+          console.error("Lỗi khi tải danh sách khu:", error);
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./user.css">
+    <title>Tài khoản</title>
+</head>
+<body>
+    <html lang="en">
+    <head >
+        <title style="color: brown">LOGIN/SIGN UP WITH ZAUR</title>
+        <meta name="author" content="Zaur">
+        <meta descryption content="Presentation of website">
+        <meta name="keywords" content="technology, cyber security, software">
+        <meta http-equiv="refresh" content="100">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="test_logincopy.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+		<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    </head>
+    <body>
+		<div class="container" id="container">
+				<div class="form-container  sign-up-container">
+				<form action="#">
+					<div class="header">Đăng ký</div>
+				
+					
+					<div class="button-input-group">
+						<div class="group input-group">
+						<input type="text" placeholder="Nhập tên của bạn" required>
+					</div>
+					<div class="group input-group">
+						<input type="number" placeholder="Nhập số điện thoại" required>
+					</div>
+					<div class="group input-group">
+						<input type="password" placeholder="Nhập mật khẩu" required pattern=".{8,}">
+					</div>
+					<div class="alert-text signup__alert">
+						<span class="help__text">Ít nhất 8 ký tự</span>
+					</div>
+					<div class="group button-group">
+						<button class="signup-btn" onclick="return false;">Đăng ký</button>
+					</div>
+					</div>
+					
+				</form>
+			</div>
+			
+			
+			<div class="form-container  sign-in-container">
+				<form action="#">
+					<div class="header">Đăng Nhập</div>
+					
+				<div class="button-input-group">
+					<div class="group input-group">
+						<input type="number" placeholder="Nhập số điện thoại" required>
+					</div>
+					<div class="group input-group">
+						<input type="password" placeholder="Mật khẩu" required pattern=".{8,}">
+					</div>
+					<div class="alert-text signup__alert">
+						<span class="help__text">Ít nhất 8 ký tự</span>
+					</div>
+					
+					<div class="group button-group">
+						<button class="signin-btn" onclick="return false;">Đăng nhập</button>
+					</div>
+				</div>
+				</form>
+			</div>
+			
+			
+			
+			<div class="overlay-container">
+				<div class="overlay">
+					<div class="overlay-panel overlay-left">
+						<h1>Chào bạn!</h1>
+						<p>Nếu có tài khoản rồi, hãy đăng nhập để đặt lịch</p>
+						
+					<div class="group button-group">
+						<button class="ghost" id="signIn">Đăng nhập</button>
+					</div>
+					
+					</div>
+					
+					<div class="overlay-panel overlay-right">
+						<h1>Chào bạn!</h1>
+            <p>Nếu chưa có tài khoản mời bạn đăng ký để đặt lịch</p>
+						
+					<div class="group button-group">
+						<button class="ghost" id="signUp">Đăng Ký</button>
+					</div>
+					
+					</div>
+				</div>
+			</div>
+		
+			
+		</div>
+		
+		<script src="/js/user.js"></script>
+    </body>
+</html>
+</body>
+</html>

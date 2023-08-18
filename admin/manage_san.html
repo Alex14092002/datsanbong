@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quản lý sân</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <h1>Quản lý sân</h1>
+    <div id="manageSanContainer">
+      <!-- Hiển thị danh sách sân và thêm/sửa/xóa sân -->
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script>
+    const databaseURL = "https://sancaul-default-rtdb.firebaseio.com"; // Thay bằng URL của Firebase Realtime Database
+
+const manageSanContainer = document.getElementById("manageSanContainer");
+
+// Lấy tham số khuId từ URL
+const urlParams = new URLSearchParams(window.location.search);
+const khuId = urlParams.get("khuId");
+
+// Hàm hiển thị danh sách sân và chức năng quản lý sân
+function displaySanListAndActions() {
+  // Hiển thị danh sách sân cho khu tương ứng
+  fetch(`${databaseURL}/khu/${khuId}/sân.json`)
+    .then(response => response.json())
+    .then(data => {
+      const sanList = document.createElement("ul");
+      for (const sanId in data) {
+        const san = data[sanId];
+        const sanItem = document.createElement("li");
+       sanItem.classList.add('py-2')
+        sanItem.textContent = san.ten;
+
+        // Thêm nút Sửa
+        const editButton = document.createElement("button");
+        editButton.textContent = "Sửa";
+        editButton.classList.add("btn", "btn-secondary", "m-2");
+        editButton.addEventListener("click", () => {
+          const newTenSan = prompt("Nhập tên sân mới:", san.ten);
+          if (newTenSan !== null) {
+            const updatedSan = { ten: newTenSan };
+            fetch(`${databaseURL}/khu/${khuId}/sân/${sanId}.json`, {
+              method: "PATCH",
+              body: JSON.stringify(updatedSan),
+              headers: {
+                "Content-Type": "application/json"
+              }
+            })
+            .then(() => {
+              // Sau khi cập nhật, tải lại trang để cập nhật danh sách
+              window.location.reload();
+            })
+            .catch(error => {
+              console.error("Lỗi khi cập nhật sân:", error);
+            });
+          }
+        });
+        sanItem.appendChild(editButton);
+
+        // Thêm nút Xóa
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Xóa";
+        deleteButton.classList.add("btn", "btn-danger");
+        deleteButton.addEventListener("click", () => {
+          if (confirm("Bạn có chắc chắn muốn xóa sân này?")) {
+            fetch(`${databaseURL}/khu/${khuId}/sân/${sanId}.json`, {
+              method: "DELETE"
+            })
+            .then(() => {
+              // Sau khi xóa, tải lại trang để cập nhật danh sách
+              window.location.reload();
+            })
+            .catch(error => {
+              console.error("Lỗi khi xóa sân:", error);
+            });
+          }
+        });
+        sanItem.appendChild(deleteButton);
+
+        sanList.appendChild(sanItem);
+      }
+      manageSanContainer.appendChild(sanList);
+    })
+    .catch(error => {
+      console.error("Lỗi khi tải danh sách sân:", error);
+    });
+
+  // Thêm chức năng thêm sân
+  const addSanButton = document.createElement("button");
+  addSanButton.textContent = "Thêm sân";
+  addSanButton.classList.add("btn", "btn-primary", "mr-3");
+  addSanButton.addEventListener("click", () => {
+    const tenSan = prompt("Nhập tên sân:");
+    if (tenSan) {
+      const newSan = { ten: tenSan };
+      fetch(`${databaseURL}/khu/${khuId}/sân.json`, {
+        method: "POST",
+        body: JSON.stringify(newSan),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then(() => {
+        // Sau khi thêm sân, tải lại trang để cập nhật danh sách
+        window.location.reload();
+      })
+      .catch(error => {
+        console.error("Lỗi khi thêm sân:", error);
+      });
+    }
+  });
+  manageSanContainer.appendChild(addSanButton);
+}
+
+// Hiển thị tiêu đề khu và danh sách sân
+fetch(`${databaseURL}/khu/${khuId}.json`)
+  .then(response => response.json())
+  .then(khu => {
+    const khuTitle = document.createElement("h2");
+    khuTitle.textContent = `Khu: ${khu.ten}`;
+    manageSanContainer.appendChild(khuTitle);
+    displaySanListAndActions();
+  })
+  .catch(error => {
+    console.error("Lỗi khi tải thông tin khu:", error);
+  });
+
+ </script>
+</body>
+</html>
