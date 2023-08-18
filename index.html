@@ -17,10 +17,15 @@
     .not-booked {
       background-color: yellow !important;
     }
+    #app{
+      padding: 0 20px;
+    }
   </style>
   <body>
-    <div id="app" class="container">
-      <h1>Web đặt sân cầu lông</h1>
+    <div id="app" class="">
+      <div class="header py-4 d-flex justify-content-between">
+      
+      </div>
     
 
       <div class="nav nav-pills mb-3" id="pills-tab" role="tablist"></div>
@@ -86,7 +91,9 @@
       const tabContainer = document.getElementById("pills-tab");
       const contentContainer = document.getElementById("pills-tabContent");
     
-   
+      const checkUser = () =>{
+        
+      }
       function displayTableForKhu(khuId) {
         const tabPane = document.getElementById(`khu-${khuId}`);
         const table = document.createElement("table");
@@ -181,7 +188,7 @@
                           "m-2"
                         );
                         button.addEventListener("click", () => {
-                        
+                          
                         });
                         blockCell.appendChild(button);
                       blockCell.classList.add("not-booked");
@@ -249,5 +256,6 @@
           console.error("Lỗi khi tải danh sách khu:", error);
         });
     </script>
+    <script src="./js/header.js"></script>
   </body>
 </html>

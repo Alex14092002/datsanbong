@@ -1,107 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./user.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./user.css" />
     <title>Tài khoản</title>
-</head>
-<body>
-    <html lang="en">
-    <head >
-        <title style="color: brown">LOGIN/SIGN UP WITH ZAUR</title>
-        <meta name="author" content="Zaur">
-        <meta descryption content="Presentation of website">
-        <meta name="keywords" content="technology, cyber security, software">
-        <meta http-equiv="refresh" content="100">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="test_logincopy.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-		<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-    </head>
-    <body>
-		<div class="container" id="container">
-				<div class="form-container  sign-up-container">
-				<form action="#">
-					<div class="header">Đăng ký</div>
-				
-					
-					<div class="button-input-group">
-						<div class="group input-group">
-						<input type="text" placeholder="Nhập tên của bạn" required>
-					</div>
-					<div class="group input-group">
-						<input type="number" placeholder="Nhập số điện thoại" required>
-					</div>
-					<div class="group input-group">
-						<input type="password" placeholder="Nhập mật khẩu" required pattern=".{8,}">
-					</div>
-					<div class="alert-text signup__alert">
-						<span class="help__text">Ít nhất 8 ký tự</span>
-					</div>
-					<div class="group button-group">
-						<button class="signup-btn" onclick="return false;">Đăng ký</button>
-					</div>
-					</div>
-					
-				</form>
-			</div>
-			
-			
-			<div class="form-container  sign-in-container">
-				<form action="#">
-					<div class="header">Đăng Nhập</div>
-					
-				<div class="button-input-group">
-					<div class="group input-group">
-						<input type="number" placeholder="Nhập số điện thoại" required>
-					</div>
-					<div class="group input-group">
-						<input type="password" placeholder="Mật khẩu" required pattern=".{8,}">
-					</div>
-					<div class="alert-text signup__alert">
-						<span class="help__text">Ít nhất 8 ký tự</span>
-					</div>
-					
-					<div class="group button-group">
-						<button class="signin-btn" onclick="return false;">Đăng nhập</button>
-					</div>
-				</div>
-				</form>
-			</div>
-			
-			
-			
-			<div class="overlay-container">
-				<div class="overlay">
-					<div class="overlay-panel overlay-left">
-						<h1>Chào bạn!</h1>
-						<p>Nếu có tài khoản rồi, hãy đăng nhập để đặt lịch</p>
-						
-					<div class="group button-group">
-						<button class="ghost" id="signIn">Đăng nhập</button>
-					</div>
-					
-					</div>
-					
-					<div class="overlay-panel overlay-right">
-						<h1>Chào bạn!</h1>
-            <p>Nếu chưa có tài khoản mời bạn đăng ký để đặt lịch</p>
-						
-					<div class="group button-group">
-						<button class="ghost" id="signUp">Đăng Ký</button>
-					</div>
-					
-					</div>
-				</div>
-			</div>
-		
-			
-		</div>
-		
-		<script src="/js/user.js"></script>
-    </body>
-</html>
-</body>
+    <title style="color: brown">LOGIN/SIGN UP WITH ZAUR</title>
+    <meta name="author" content="Zaur" />
+    <meta descryption content="Presentation of website" />
+    <meta name="keywords" content="technology, cyber security, software" />
+    <meta http-equiv="refresh" content="100" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="test_logincopy.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <section>
+      <div class="container">
+        <div class="user signinBx">
+          <div class="imgBx">
+            <img
+              src="https://raw.githubusercontent.com/WoojinFive/CSS_Playground/master/Responsive%20Login%20and%20Registration%20Form/img1.jpg"
+              alt=""
+            />
+          </div>
+          <div class="formBx">
+            <form action="" onsubmit="return false;">
+              <h2>Đăng nhập</h2>
+              <input type="number" name="signinPhone" placeholder="Nhập số điện thoại" />
+              <input type="password" name="signinPassword" placeholder="Nhập mật khẩu" />
+              <input type="submit" name="" value="Đăng Nhập" />
+              <p class="signup">
+                Bạn chưa có tài khoản?
+                <a href="#" onclick="toggleForm();">Đăng Ký.</a>
+              </p>
+            </form>
+          </div>
+        </div>
+        <div class="user signupBx">
+          <div class="formBx">
+            <form action="" onsubmit="return false;">
+              <h2>Đăng ký thành viên</h2>
+			  <input type="text" name="name" placeholder="Nhập họ và tên" />
+			  <input type="number" name="phone" placeholder="Nhập số điện thoại" />
+			  <input type="password" name="password" placeholder="Mật khẩu" />
+			  <input type="password" name="confirmPassword" placeholder="Nhập lại mật khẩu" />
+			  <input type="submit" name="" value="Đăng ký" />			  
+              <p class="signup">
+                Bạn đã có tài khoản?
+                <a href="#" onclick="toggleForm();">Đăng nhập.</a>
+              </p>
+            </form>
+          </div>
+          <div class="imgBx">
+            <img
+              src="https://raw.githubusercontent.com/WoojinFive/CSS_Playground/master/Responsive%20Login%20and%20Registration%20Form/img2.jpg"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+   
+	  <script>
+        const toggleForm = () => {
+            const container = document.querySelector(".container");
+            container.classList.toggle("active");
+        };
+        
+        const databaseURL = "https://sancaul-default-rtdb.firebaseio.com";
+        
+        // Lấy tham chiếu đến các phần tử DOM của biểu mẫu đăng ký
+        const signupForm = document.querySelector(".signupBx form");
+        const nameInput = document.querySelector(".signupBx input[name='name']");
+        const phoneInput = document.querySelector(".signupBx input[name='phone']");
+        const passwordInput = document.querySelector(".signupBx input[name='password']");
+        const confirmPasswordInput = document.querySelector(".signupBx input[name='confirmPassword']");
+        
+        // Xử lý sự kiện khi người dùng nhấn nút "Đăng ký"
+        signupForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            
+            const name = nameInput.value;
+            const phone = phoneInput.value;
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+            
+            if (password !== confirmPassword) {
+                alert("Mật khẩu nhập lại không khớp");
+                return;
+            }
+            
+            const userData = {
+                name: name,
+                phone: phone,
+                password: password
+            };
+            
+            // Gửi dữ liệu đăng ký lên Firebase
+            fetch(`${databaseURL}/user.json`, {
+                method: "POST",
+                body: JSON.stringify(userData),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                alert("Đăng ký thành công");
+            })
+            .catch((error) => {
+                alert("Đã xảy ra lỗi khi đăng ký");
+                console.error("Lỗi khi gửi dữ liệu đăng ký:", error);
+            });
+        });
+        
+        // Lấy tham chiếu đến các phần tử DOM của biểu mẫu đăng nhập
+        const signinForm = document.querySelector(".signinBx form");
+        const signinPhoneInput = document.querySelector(".signinBx input[name='signinPhone']");
+        const signinPasswordInput = document.querySelector(".signinBx input[name='signinPassword']");
+        
+        // Xử lý sự kiện khi người dùng nhấn nút "Đăng nhập"
+        signinForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    
+    const signinPhone = signinPhoneInput.value;
+    const signinPassword = signinPasswordInput.value;
+    
+    fetch(`${databaseURL}/user.json`)
+    .then((response) => response.json())
+    .then((users) => {
+        const matchingUser = Object.entries(users).find(([key, user]) => user.phone === signinPhone && user.password === signinPassword);
+        if (matchingUser) {
+            const [userId, userData] = matchingUser;
+            localStorage.setItem("signedInUserId", userId);
+            localStorage.setItem('signedInPhone' , signinPhone)
+            alert("Đăng nhập thành công");
+            // Chuyển hướng hoặc thực hiện các hành động khác sau khi đăng nhập thành công
+            window.location.href = './index.html'
+        } else {
+            alert("Thông tin đăng nhập không chính xác");
+        }
+    })
+    .catch((error) => {
+        alert("Đã xảy ra lỗi khi đăng nhập");
+        console.error("Lỗi khi kiểm tra đăng nhập:", error);
+    });
+});
+    </script>
+	  
+  </body>
 </html>
