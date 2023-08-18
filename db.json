@@ -4,27 +4,15 @@
       "price": "30000",
       "time": "4:30",
       "listbook":{
-        "0":{
-          "status":"Đang chờ duyệt",
-          "user":"Nguyễn Văn A",
-          "san":"Sân A1"
-        },
-        "1":{
-          "status":"Đang chờ duyệt",
-          "user":"Nguyễn Văn B",
-          "san":"Sân B1"
-        }
+       
+       
       }
     },
     "-Nc5cXo46XVeho6kt10Y": {
       "price": "3000000",
       "time": "5:00",
       "listbook":{
-        "0":{
-          "status":"Đang chờ duyệt",
-          "user":"Nguyễn Văn C",
-          "san":"Sân C2"
-        }
+      
       }
     },
     "-Nc5c_gI_Nq61NWsFa5D": {
