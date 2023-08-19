@@ -17,16 +17,13 @@
     .not-booked {
       background-color: yellow !important;
     }
-    #app{
+    #app {
       padding: 0 20px;
     }
   </style>
   <body>
     <div id="app" class="">
-      <div class="header py-4 d-flex justify-content-between">
-      
-      </div>
-    
+      <div class="header py-4 d-flex justify-content-between"></div>
 
       <div class="nav nav-pills mb-3" id="pills-tab" role="tablist"></div>
       <div class="tab-content" id="pills-tabContent"></div>
@@ -90,10 +87,51 @@
       const databaseURL = "https://sancaul-default-rtdb.firebaseio.com";
       const tabContainer = document.getElementById("pills-tab");
       const contentContainer = document.getElementById("pills-tabContent");
-    
-      const checkUser = () =>{
-        
-      }
+
+      const checkBooking = (sanTen, blockId) => {
+        const phone = localStorage.getItem("signedInPhone");
+
+        if (phone) {
+          const bookingData = {
+            san: sanTen,
+            status: "Đang chờ duyệt",
+            user: phone,
+          };
+          console.log(blockId);
+
+          fetch(`${databaseURL}/blocks.json`)
+            .then((response) => response.json())
+            .then((blocks) => {
+              console.log(blocks);
+
+              
+                fetch(`${databaseURL}/blocks/${blockId}/listbook.json`, {
+                  method: "POST",
+                  body: JSON.stringify(bookingData),
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                })
+                  .then((response) => response.json())
+                  .then(() => {
+                    alert("Đặt lịch thành công");
+                    location.reload()
+                  })
+                  .catch((error) => {
+                    alert("Đã xảy ra lỗi khi đặt lịch");
+                    console.error("Lỗi khi đặt lịch:", error);
+                  });
+              
+            })
+            .catch((error) => {
+              console.error("Lỗi khi tải danh sách blocks:", error);
+            });
+        } else {
+          alert("Bạn cần đăng nhập để đặt lịch");
+          window.location.href = "./user.html";
+        }
+      };
+
       function displayTableForKhu(khuId) {
         const tabPane = document.getElementById(`khu-${khuId}`);
         const table = document.createElement("table");
@@ -138,17 +176,24 @@
 
                   for (const sanId in data) {
                     const blockCell = document.createElement("td");
+                    blockCell.setAttribute("data-khuid", khuId);
+                        blockCell.setAttribute("data-sanid", sanId);
+                        blockCell.setAttribute("data-blockid", blockId);
                     sanRow.appendChild(blockCell);
 
                     const san = data[sanId];
                     if (block.listbook) {
-                      const bookedSan = block.listbook.find(
+                      const listbookArray = Array.isArray(block.listbook)
+                        ? block.listbook
+                        : Object.values(block.listbook);
+
+                      const bookedSan = listbookArray.find(
                         (booked) => booked.san === san.ten
                       );
+
                       if (bookedSan) {
                         blockCell.textContent =
                           bookedSan.status + " - " + bookedSan.user;
-
                         blockCell.classList.add("booked");
                         blockCell.setAttribute("data-khuid", khuId);
                         blockCell.setAttribute("data-sanid", sanId);
@@ -160,10 +205,8 @@
                             bookedSan.bookingId
                           );
                         } else {
-                          const listbookIndex = Object.keys(
-                            block.listbook
-                          ).find(
-                            (index) => block.listbook[index].san === san.ten
+                          const listbookIndex = Object.keys(listbookArray).find(
+                            (index) => listbookArray[index].san === san.ten
                           );
                           if (listbookIndex !== undefined) {
                             blockCell.setAttribute(
@@ -172,25 +215,37 @@
                             );
                           }
                         }
-
                       } else {
-                        blockCell.textContent = "Trống";
-                        blockCell.classList.add("not-booked");
-                      }
-                    } else {
-                      
-                      const button = document.createElement("button");
+                        const button = document.createElement("button");
                         button.textContent = "Đặt lịch";
+                        
                         button.classList.add(
                           "btn",
                           "btn-sm",
                           "btn-primary",
                           "m-2"
                         );
-                        button.addEventListener("click", () => {
-                          
-                        });
+
                         blockCell.appendChild(button);
+                        blockCell.classList.add("not-booked");
+                        
+                        button.addEventListener("click", () => {
+                          checkBooking(san.ten , blockId); // Truyền tên sân cho hàm checkBooking
+                        });
+                      }
+                    } else {
+                      const button = document.createElement("button");
+                      button.textContent = "Đặt lịch";
+                      button.classList.add(
+                        "btn",
+                        "btn-sm",
+                        "btn-primary",
+                        "m-2"
+                      );
+                      button.addEventListener("click", () => {
+                        checkBooking(san.ten, blockId); // Truyền tên sân cho hàm checkBooking
+                      });
+                      blockCell.appendChild(button);
                       blockCell.classList.add("not-booked");
                     }
                   }
@@ -238,8 +293,6 @@
             contentContainer.appendChild(tabPane);
 
             displayTableForKhu(khuId);
-
-        
           }
 
           const firstTabLink = document.querySelector(
@@ -255,7 +308,9 @@
         .catch((error) => {
           console.error("Lỗi khi tải danh sách khu:", error);
         });
+        
     </script>
+ 
     <script src="./js/header.js"></script>
   </body>
 </html>
