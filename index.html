@@ -20,23 +20,40 @@
     #app {
       padding: 0 20px;
     }
-    .header{
-        align-items: center;
+    .header {
+      align-items: center;
     }
   </style>
   <body>
     <div id="app" class="">
       <div class="header py-4 d-flex justify-content-between"></div>
-
+      <div class="mb-3">
+        <label for="dateSelect" class="form-label">Chọn ngày:</label>
+        <select class="form-select" id="dateSelect"></select>
+      </div>
       <div class="nav nav-pills mb-3" id="pills-tab" role="tablist"></div>
       <div class="tab-content" id="pills-tabContent"></div>
     </div>
-    <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+    <div
+      class="modal fade"
+      id="bookingModal"
+      tabindex="-1"
+      aria-labelledby="bookingModalLabel"
+      aria-hidden="true"
+    >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="bookingModalLabel">Xác nhận đặt lịch</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="closeBookingModal()" aria-label="Close"></button>
+            <h5 class="modal-title" id="bookingModalLabel">
+              Xác nhận đặt lịch
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              onclick="closeBookingModal()"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body">
             <p id="modalSanInfo"></p>
@@ -47,295 +64,305 @@
             </select>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" id="confirmBookingBtn">Đặt lịch</button>
-            <button type="button" class="btn btn-secondary" onclick="closeBookingModal()" data-bs-dismiss="modal">Đóng</button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="confirmBookingBtn"
+            >
+              Đặt lịch
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              onclick="closeBookingModal()"
+              data-bs-dismiss="modal"
+            >
+              Đóng
+            </button>
           </div>
         </div>
       </div>
     </div>
-    
-    
-    
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
-  <script>
-    // Function to format currency
-function formatCurrency(amount) {
-  const formatter = new Intl.NumberFormat("vi-VN", {
-    style: "currency",
-    currency: "VND",
-  });
-  return formatter.format(amount);
-}
+    <script>
+      // Function to format currency
+      function formatCurrency(amount) {
+        const formatter = new Intl.NumberFormat("vi-VN", {
+          style: "currency",
+          currency: "VND",
+        });
+        return formatter.format(amount);
+      }
 
-const databaseURL = "https://sancaul-default-rtdb.firebaseio.com";
-const tabContainer = document.getElementById("pills-tab");
-const contentContainer = document.getElementById("pills-tabContent");
+      const databaseURL = "https://sancaul-default-rtdb.firebaseio.com";
+      const tabContainer = document.getElementById("pills-tab");
+      const contentContainer = document.getElementById("pills-tabContent");
 
-// Function to close booking modal
-function closeBookingModal() {
-  const bookingModal = document.getElementById("bookingModal");
-  bookingModal.classList.remove("show");
-  bookingModal.style.display = "none";
-  document.body.classList.remove("modal-open");
-  const modalBackdrop = document.querySelector(".modal-backdrop");
-  if (modalBackdrop) {
-    document.body.removeChild(modalBackdrop);
-  }
-}
+      // Function to close booking modal
+      function closeBookingModal() {
+        const bookingModal = document.getElementById("bookingModal");
+        bookingModal.classList.remove("show");
+        bookingModal.style.display = "none";
+        document.body.classList.remove("modal-open");
+        const modalBackdrop = document.querySelector(".modal-backdrop");
+        if (modalBackdrop) {
+          document.body.removeChild(modalBackdrop);
+        }
+      }
 
-// Function to open booking modal with selected information
-function openBookingModal(sanTen, blockId, price) {
-  const modalSanInfo = document.getElementById("modalSanInfo");
-  const modalPriceInfo = document.getElementById("modalPriceInfo");
-  const confirmBookingBtn = document.getElementById("confirmBookingBtn");
-  const paymentMethod = document.getElementById("paymentMethod");
+      // Function to open booking modal with selected information
+      function openBookingModal(sanTen, blockId, price) {
+        const modalSanInfo = document.getElementById("modalSanInfo");
+        const modalPriceInfo = document.getElementById("modalPriceInfo");
+        const confirmBookingBtn = document.getElementById("confirmBookingBtn");
+        const paymentMethod = document.getElementById("paymentMethod");
 
-  modalSanInfo.textContent = `Sân/Khu: ${sanTen}`;
-  modalPriceInfo.textContent = `Giá tiền: ${formatCurrency(price)}`;
+        modalSanInfo.textContent = `Sân/Khu: ${sanTen}`;
+        modalPriceInfo.textContent = `Giá tiền: ${formatCurrency(price)}`;
 
-  // Clear any previous event listeners
-  confirmBookingBtn.removeEventListener("click", null);
+        // Clear any previous event listeners
+        confirmBookingBtn.removeEventListener("click", null);
 
-  // Add a new event listener to the "Đặt lịch" button in modal
-  confirmBookingBtn.addEventListener("click", () => {
-    // Perform the booking process based on the selected payment method
-    const phone = localStorage.getItem("signedInPhone");
-    if (phone) {
-      const selectedPaymentMethod = paymentMethod.value;
-      if (selectedPaymentMethod === "cash") {
-        const bookingData = {
-          san: sanTen,
-          status: "Đang chờ duyệt",
-          user: phone,
-          paymentMethod: selectedPaymentMethod,
-        };
+        // Add a new event listener to the "Đặt lịch" button in modal
+        confirmBookingBtn.addEventListener("click", () => {
+          // Perform the booking process based on the selected payment method
+          const phone = localStorage.getItem("signedInPhone");
+          if (phone) {
+            const selectedPaymentMethod = paymentMethod.value;
+            if (selectedPaymentMethod === "cash") {
+              const bookingData = {
+                san: sanTen,
+                status: "Đang chờ duyệt",
+                user: phone,
+                paymentMethod: selectedPaymentMethod,
+              };
 
-        fetch(`${databaseURL}/blocks/${blockId}/listbook.json`, {
-          method: "POST",
-          body: JSON.stringify(bookingData),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
+              fetch(`${databaseURL}/blocks/${blockId}/listbook.json`, {
+                method: "POST",
+                body: JSON.stringify(bookingData),
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              })
+                .then((response) => response.json())
+                .then(() => {
+                  alert("Đặt lịch thành công");
+                  location.reload();
+                })
+                .catch((error) => {
+                  alert("Đã xảy ra lỗi khi đặt lịch");
+                  console.error("Lỗi khi đặt lịch:", error);
+                });
+            } else if (selectedPaymentMethod === "wallet") {
+              return;
+            } else {
+              alert("Vui lòng chọn phương thức thanh toán");
+            }
+          } else {
+            alert("Bạn cần đăng nhập để đặt lịch");
+            window.location.href = "./user.html";
+          }
+        });
+
+        // Open the modal
+        const bookingModal = document.getElementById("bookingModal");
+        bookingModal.classList.add("show");
+        bookingModal.style.display = "block";
+        document.body.classList.add("modal-open");
+        const modalBackdrop = document.createElement("div");
+        modalBackdrop.classList.add("modal-backdrop", "fade", "show");
+        document.body.appendChild(modalBackdrop);
+      }
+
+      // Function to display table for a specific khu
+      function displayTableForKhu(khuId) {
+        const tabPane = document.getElementById(`khu-${khuId}`);
+        const table = document.createElement("table");
+        table.classList.add("table", "table-bordered");
+        tabPane.appendChild(table);
+
+        // Fetch the list of blocks
+        fetch(`${databaseURL}/khu/${khuId}/sân.json`)
           .then((response) => response.json())
-          .then(() => {
-            alert("Đặt lịch thành công");
-            location.reload();
-          })
-          .catch((error) => {
-            alert("Đã xảy ra lỗi khi đặt lịch");
-            console.error("Lỗi khi đặt lịch:", error);
-          });
-      } else if (selectedPaymentMethod === "wallet") {
-       return
-      } else {
-        alert("Vui lòng chọn phương thức thanh toán");
-      }
-    } else {
-      alert("Bạn cần đăng nhập để đặt lịch");
-      window.location.href = "./user.html";
-    }
-
-
-  });
-
-  // Open the modal
-  const bookingModal = document.getElementById("bookingModal");
-  bookingModal.classList.add("show");
-  bookingModal.style.display = "block";
-  document.body.classList.add("modal-open");
-  const modalBackdrop = document.createElement("div");
-  modalBackdrop.classList.add("modal-backdrop", "fade", "show");
-  document.body.appendChild(modalBackdrop);
-}
-
-// Function to display table for a specific khu
-function displayTableForKhu(khuId) {
-  const tabPane = document.getElementById(`khu-${khuId}`);
-  const table = document.createElement("table");
-  table.classList.add("table", "table-bordered");
-  tabPane.appendChild(table);
-
-  // Fetch the list of blocks
-  fetch(`${databaseURL}/khu/${khuId}/sân.json`)
-    .then((response) => response.json())
-    .then((data) => {
-      // Create thead with columns
-      const thead = document.createElement("thead");
-      thead.classList.add('sticky-top' , 'bg-light')
-      const theadRow = document.createElement("tr");
-      const timeHeader = document.createElement("th");
-      timeHeader.scope = "col";
-      timeHeader.textContent = "Thời gian";
-      theadRow.appendChild(timeHeader);
-
-      for (const sanId in data) {
-        const san = data[sanId];
-        const blockHeader = document.createElement("th");
-        blockHeader.scope = "col";
-        blockHeader.textContent = san.ten;
-        theadRow.appendChild(blockHeader);
-      }
-      thead.appendChild(theadRow);
-      table.appendChild(thead);
-
-      // Fetch the list of blocks
-      fetch(`${databaseURL}/blocks.json`)
-        .then((response) => response.json())
-        .then((blocks) => {
-          // Create tbody with rows
-          const tbody = document.createElement("tbody");
-          for (const blockId in blocks) {
-            const block = blocks[blockId];
-            const sanRow = document.createElement("tr");
-            const sanNameCell = document.createElement("td");
-            sanNameCell.textContent =
-              block.time + "-" + formatCurrency(block.price);
-            sanRow.appendChild(sanNameCell);
+          .then((data) => {
+            // Create thead with columns
+            const thead = document.createElement("thead");
+            thead.classList.add("sticky-top", "bg-light");
+            const theadRow = document.createElement("tr");
+            const timeHeader = document.createElement("th");
+            timeHeader.scope = "col";
+            timeHeader.textContent = "Thời gian";
+            theadRow.appendChild(timeHeader);
 
             for (const sanId in data) {
-              const blockCell = document.createElement("td");
-              blockCell.setAttribute("data-khuid", khuId);
-              blockCell.setAttribute("data-sanid", sanId);
-              blockCell.setAttribute("data-blockid", blockId);
-              sanRow.appendChild(blockCell);
-
               const san = data[sanId];
-              if (block.listbook) {
-                const listbookArray = Array.isArray(block.listbook)
-                  ? block.listbook
-                  : Object.values(block.listbook);
+              const blockHeader = document.createElement("th");
+              blockHeader.scope = "col";
+              blockHeader.textContent = san.ten;
+              theadRow.appendChild(blockHeader);
+            }
+            thead.appendChild(theadRow);
+            table.appendChild(thead);
 
-                const bookedSan = listbookArray.find(
-                  (booked) => booked.san === san.ten
-                );
+            // Fetch the list of blocks
+            fetch(`${databaseURL}/blocks.json`)
+              .then((response) => response.json())
+              .then((blocks) => {
+                // Create tbody with rows
+                const tbody = document.createElement("tbody");
+                for (const blockId in blocks) {
+                  const block = blocks[blockId];
+                  const sanRow = document.createElement("tr");
+                  const sanNameCell = document.createElement("td");
+                  sanNameCell.textContent =
+                    block.time + "-" + formatCurrency(block.price);
+                  sanRow.appendChild(sanNameCell);
 
-                if (bookedSan) {
-                  blockCell.textContent =
-                    bookedSan.status + " - " + bookedSan.user;
-                  blockCell.classList.add("booked");
-                  blockCell.setAttribute("data-khuid", khuId);
-                  blockCell.setAttribute("data-sanid", sanId);
-                  blockCell.setAttribute("data-blockid", blockId);
+                  for (const sanId in data) {
+                    const blockCell = document.createElement("td");
+                    blockCell.setAttribute("data-khuid", khuId);
+                    blockCell.setAttribute("data-sanid", sanId);
+                    blockCell.setAttribute("data-blockid", blockId);
+                    sanRow.appendChild(blockCell);
 
-                  if (bookedSan.hasOwnProperty("bookingId")) {
-                    blockCell.setAttribute(
-                      "data-bookingid",
-                      bookedSan.bookingId
-                    );
-                  } else {
-                    const listbookIndex = Object.keys(listbookArray).find(
-                      (index) => listbookArray[index].san === san.ten
-                    );
-                    if (listbookIndex !== undefined) {
-                      blockCell.setAttribute(
-                        "data-bookingid",
-                        listbookIndex
+                    const san = data[sanId];
+                    if (block.listbook) {
+                      const listbookArray = Array.isArray(block.listbook)
+                        ? block.listbook
+                        : Object.values(block.listbook);
+
+                      const bookedSan = listbookArray.find(
+                        (booked) => booked.san === san.ten
                       );
+
+                      if (bookedSan) {
+                        blockCell.textContent =
+                          bookedSan.status + " - " + bookedSan.user;
+                        blockCell.classList.add("booked");
+                        blockCell.setAttribute("data-khuid", khuId);
+                        blockCell.setAttribute("data-sanid", sanId);
+                        blockCell.setAttribute("data-blockid", blockId);
+
+                        if (bookedSan.hasOwnProperty("bookingId")) {
+                          blockCell.setAttribute(
+                            "data-bookingid",
+                            bookedSan.bookingId
+                          );
+                        } else {
+                          const listbookIndex = Object.keys(listbookArray).find(
+                            (index) => listbookArray[index].san === san.ten
+                          );
+                          if (listbookIndex !== undefined) {
+                            blockCell.setAttribute(
+                              "data-bookingid",
+                              listbookIndex
+                            );
+                          }
+                        }
+                      } else {
+                        const button = document.createElement("button");
+                        button.textContent = "Đặt lịch";
+
+                        button.classList.add(
+                          "btn",
+                          "btn-sm",
+                          "btn-primary",
+                          "m-2"
+                        );
+
+                        blockCell.appendChild(button);
+                        blockCell.classList.add("not-booked");
+
+                        button.addEventListener("click", () => {
+                          openBookingModal(san.ten, blockId, block.price); // Pass san name and block info to the modal
+                        });
+                      }
+                    } else {
+                      const button = document.createElement("button");
+                      button.textContent = "Đặt lịch";
+                      button.classList.add(
+                        "btn",
+                        "btn-sm",
+                        "btn-primary",
+                        "m-2"
+                      );
+                      button.addEventListener("click", () => {
+                        openBookingModal(san.ten, blockId, block.price); // Pass san name and block info to the modal
+                      });
+                      blockCell.appendChild(button);
+                      blockCell.classList.add("not-booked");
                     }
                   }
-                } else {
-                  const button = document.createElement("button");
-                  button.textContent = "Đặt lịch";
 
-                  button.classList.add(
-                    "btn",
-                    "btn-sm",
-                    "btn-primary",
-                    "m-2"
-                  );
-
-                  blockCell.appendChild(button);
-                  blockCell.classList.add("not-booked");
-
-                  button.addEventListener("click", () => {
-                    openBookingModal(san.ten, blockId, block.price); // Pass san name and block info to the modal
-                  });
+                  tbody.appendChild(sanRow);
                 }
-              } else {
-                const button = document.createElement("button");
-                button.textContent = "Đặt lịch";
-                button.classList.add(
-                  "btn",
-                  "btn-sm",
-                  "btn-primary",
-                  "m-2"
-                );
-                button.addEventListener("click", () => {
-                  openBookingModal(san.ten, blockId, block.price); // Pass san name and block info to the modal
-                });
-                blockCell.appendChild(button);
-                blockCell.classList.add("not-booked");
-              }
-            }
-
-            tbody.appendChild(sanRow);
-          }
-          table.appendChild(tbody);
-        })
-        .catch((error) => {
-          console.error("Lỗi khi tải danh sách sân:", error);
-        });
-    })
-    .catch((error) => {
-      console.error("Lỗi khi tải danh sách block:", error);
-    });
-}
-
-// Fetch and display data for each khu
-fetch(`${databaseURL}/khu.json`)
-  .then((response) => response.json())
-  .then((data) => {
-    let firstKhuId = null;
-
-    for (const khuId in data) {
-      const khu = data[khuId];
-
-      if (!firstKhuId) {
-        firstKhuId = khuId;
+                table.appendChild(tbody);
+              })
+              .catch((error) => {
+                console.error("Lỗi khi tải danh sách sân:", error);
+              });
+          })
+          .catch((error) => {
+            console.error("Lỗi khi tải danh sách block:", error);
+          });
       }
 
-      const tabLink = document.createElement("button");
-      tabLink.classList.add("nav-link");
-      tabLink.textContent = khu.ten;
-      tabLink.setAttribute("data-bs-toggle", "pill");
-      tabLink.setAttribute("data-bs-target", `#khu-${khuId}`);
-      tabLink.setAttribute("role", "tab");
-      tabLink.setAttribute("aria-controls", `khu-${khuId}`);
-      tabLink.setAttribute("aria-selected", "false");
-      tabContainer.appendChild(tabLink);
+      // Fetch and display data for each khu
+      fetch(`${databaseURL}/khu.json`)
+        .then((response) => response.json())
+        .then((data) => {
+          let firstKhuId = null;
 
-      const tabPane = document.createElement("div");
-      tabPane.classList.add("tab-pane", "fade");
-      tabPane.id = `khu-${khuId}`;
-      tabPane.setAttribute("role", "tabpanel");
-      tabPane.setAttribute("aria-labelledby", `khu-${khuId}-tab`);
-      contentContainer.appendChild(tabPane);
+          for (const khuId in data) {
+            const khu = data[khuId];
 
-      displayTableForKhu(khuId);
-    }
+            if (!firstKhuId) {
+              firstKhuId = khuId;
+            }
 
-    const firstTabLink = document.querySelector(
-      `[data-bs-target="#khu-${firstKhuId}"]`
-    );
-    const firstTabPane = document.getElementById(`khu-${firstKhuId}`);
+            const tabLink = document.createElement("button");
+            tabLink.classList.add("nav-link");
+            tabLink.textContent = khu.ten;
+            tabLink.setAttribute("data-bs-toggle", "pill");
+            tabLink.setAttribute("data-bs-target", `#khu-${khuId}`);
+            tabLink.setAttribute("role", "tab");
+            tabLink.setAttribute("aria-controls", `khu-${khuId}`);
+            tabLink.setAttribute("aria-selected", "false");
+            tabContainer.appendChild(tabLink);
 
-    if (firstTabLink && firstTabPane) {
-      firstTabLink.classList.add("active");
-      firstTabPane.classList.add("show", "active");
-    }
-  })
-  .catch((error) => {
-    console.error("Lỗi khi tải danh sách khu:", error);
-  });
+            const tabPane = document.createElement("div");
+            tabPane.classList.add("tab-pane", "fade");
+            tabPane.id = `khu-${khuId}`;
+            tabPane.setAttribute("role", "tabpanel");
+            tabPane.setAttribute("aria-labelledby", `khu-${khuId}-tab`);
+            contentContainer.appendChild(tabPane);
 
-  </script>
+            displayTableForKhu(khuId);
+          }
+
+          const firstTabLink = document.querySelector(
+            `[data-bs-target="#khu-${firstKhuId}"]`
+          );
+          const firstTabPane = document.getElementById(`khu-${firstKhuId}`);
+
+          if (firstTabLink && firstTabPane) {
+            firstTabLink.classList.add("active");
+            firstTabPane.classList.add("show", "active");
+          }
+        })
+        .catch((error) => {
+          console.error("Lỗi khi tải danh sách khu:", error);
+        });
+    </script>
     <script src="./js/header.js"></script>
+    <script src="./js/date.js"></script>
   </body>
 </html>
