@@ -91,8 +91,61 @@
     ></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="./js/header.js"></script>
 
     <script>
+      let currentDate;
+      document.addEventListener("DOMContentLoaded", function () {
+        const dateSelect = document.getElementById("dateSelect");
+        currentDate = formatDate(new Date()); // Lấy ngày hiện tại
+        console.log("Ngày hiện tại:", currentDate);
+        // Tạo mảng chứa 7 ngày tiếp theo (tính từ ngày hiện tại)
+        const dateOptions = [];
+        const defaultDate = new Date(); // Khởi tạo biến defaultDate với ngày hiện tại
+        for (let i = 0; i < 7; i++) {
+          const currentDate = new Date(defaultDate); // Sử dụng defaultDate để tính toán ngày
+          currentDate.setDate(currentDate.getDate() + i);
+          const formattedDate = formatDate(currentDate); // Sử dụng hàm formatDate để định dạng ngày
+          dateOptions.push({ value: formattedDate, text: formattedDate });
+        }
+
+        // Thêm các tùy chọn vào phần tử select
+        dateOptions.forEach((option) => {
+          const optionElement = document.createElement("option");
+          optionElement.value = option.value;
+          optionElement.textContent = option.text;
+          dateSelect.appendChild(optionElement);
+        });
+
+        // Đặt giá trị mặc định cho hộp chọn ngày
+        dateSelect.value = dateOptions[0].value;
+        handleDateChange();
+      });
+
+      dateSelect.addEventListener("change", handleDateChange);
+
+      // Hàm để xử lý sự kiện thay đổi ngày
+      function handleDateChange() {
+        const selectedDateParts = dateSelect.value.split("-");
+        const selectedDate = new Date(
+          selectedDateParts[2],
+          selectedDateParts[1] - 1,
+          selectedDateParts[0]
+        );
+         
+
+        // Tại đây, bạn có thể xử lý hiển thị thông tin đặt sân cho ngày đã chọn.
+        // Bạn có thể sử dụng mã nguồn hiện tại của mình để tạo bảng và cập nhật sân trống.
+      }
+
+      // Hàm để định dạng ngày thành "20-8-2023"
+      function formatDate(date) {
+        const day = date.getDate();
+        const month = date.getMonth() + 1;
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+      }
+
       // Function to format currency
       function formatCurrency(amount) {
         const formatter = new Intl.NumberFormat("vi-VN", {
@@ -145,13 +198,16 @@
                 paymentMethod: selectedPaymentMethod,
               };
 
-              fetch(`${databaseURL}/blocks/${blockId}/listbook.json`, {
-                method: "POST",
-                body: JSON.stringify(bookingData),
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              })
+              fetch(
+                `${databaseURL}/day/${currentDate}/blocks/${blockId}/listbook.json`,
+                {
+                  method: "POST",
+                  body: JSON.stringify(bookingData),
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                }
+              )
                 .then((response) => response.json())
                 .then(() => {
                   alert("Đặt lịch thành công");
@@ -213,7 +269,7 @@
             table.appendChild(thead);
 
             // Fetch the list of blocks
-            fetch(`${databaseURL}/blocks.json`)
+            fetch(`${databaseURL}/day/${currentDate}/blocks.json`)
               .then((response) => response.json())
               .then((blocks) => {
                 // Create tbody with rows
@@ -362,7 +418,5 @@
           console.error("Lỗi khi tải danh sách khu:", error);
         });
     </script>
-    <script src="./js/header.js"></script>
-    <script src="./js/date.js"></script>
   </body>
 </html>
