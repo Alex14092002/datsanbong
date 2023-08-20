@@ -31,100 +31,134 @@
     <!-- Danh sách block sẽ được hiển thị tại đây -->
   </div>
 
-<script>
-const databaseURL = "https://sancaul-default-rtdb.firebaseio.com"; // Thay bằng URL của Firebase Realtime Database
-
-const addBlockForm = document.getElementById("addBlockForm");
-const addBlockButton = document.getElementById("addBlockButton");
-const blocksContainer = document.getElementById("blocksContainer");
-
-// Hiển thị danh sách block
-async function displayBlocks() {
-  blocksContainer.innerHTML = ''; // Xóa nội dung cũ
-
-  try {
-    const response = await fetch(`${databaseURL}/blocks.json`);
-    const data = await response.json();
+  <script>
+    const databaseURL = "https://sancaul-default-rtdb.firebaseio.com"; // Thay bằng URL của Firebase Realtime Database
     
-    for (const blockId in data) {
-      const block = data[blockId];
-      const blockItem = document.createElement("div");
-      blockItem.textContent = `Time: ${block.time}, Price: ${block.price}`;
-      blocksContainer.appendChild(blockItem);
-    }
-  } catch (error) {
-    console.error("Lỗi khi tải danh sách block:", error);
-  }
-}
-
-// Thêm block
-addBlockForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-
-  const formData = new FormData(addBlockForm);
-  const time = formData.get("time");
-  const price = formData.get("price");
-
-  if (time && price) {
-    addBlockButton.disabled = true; // Tắt nút "Thêm block" trong thời gian chờ
-
-    try {
-      const response = await fetch(`${databaseURL}/blocks.json`, {
-        method: "POST",
-        body: JSON.stringify({
-          time: time,
-          price: price
-        }),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      });
-      const data = await response.json();
-
-      console.log("Block đã được thêm:", data);
-
-      // Thêm block vào các sân ở các khu
+    const addBlockForm = document.getElementById("addBlockForm");
+    const addBlockButton = document.getElementById("addBlockButton");
+    const blocksContainer = document.getElementById("blocksContainer");
+    
+    // Hiển thị danh sách block
+    async function displayBlocks() {
+      blocksContainer.innerHTML = ''; // Xóa nội dung cũ
+    
       try {
-        const khuResponse = await fetch(`${databaseURL}/khu.json`);
-        const khuData = await khuResponse.json();
+        const response = await fetch(`${databaseURL}/blocks.json`);
+        const data = await response.json();
         
-        for (const khuId in khuData) {
-          const khu = khuData[khuId];
-          for (const sanId in khu.sân) {
-            try {
-              await fetch(`${databaseURL}/khu/${khuId}/sân/${sanId}/blockItem.json`, {
-                method: "POST",
-                body: JSON.stringify({
-                  time: time,
-                  price: price,
-                  status: "Trống"
-                }),
-                headers: {
-                  "Content-Type": "application/json"
-                }
-              });
-            } catch (error) {
-              console.error("Lỗi khi thêm blockItem vào các sân:", error);
-            }
-          }
+        for (const blockId in data) {
+          const block = data[blockId];
+          const blockItem = document.createElement("div");
+          blockItem.dataset.id = blockId;
+          blockItem.dataset.time = block.time;
+          blockItem.dataset.price = block.price;
+          blockItem.innerHTML = `
+            <p>Time: ${block.time}, Price: ${block.price}</p>
+            <button class="editBlockButton">Sửa</button>
+            <button class="deleteBlockButton">Xóa</button>
+          `;
+          blocksContainer.appendChild(blockItem);
         }
       } catch (error) {
-        console.error("Lỗi khi thêm blockItem vào các sân:", error);
+        console.error("Lỗi khi tải danh sách block:", error);
       }
-
-      addBlockButton.disabled = false; // Mở lại nút "Thêm block"
-      alert("Đã thêm block thành công!"); // Hiển thị cảnh báo
-      
-      displayBlocks(); // Hiển thị lại danh sách block sau khi thêm
-    } catch (error) {
-      console.error("Lỗi khi thêm block:", error);
     }
-  }
-});
-
-// Hiển thị danh sách block khi tải trang
-displayBlocks();
-
-</script>
+    
+    // Sửa block
+    blocksContainer.addEventListener("click", async (event) => {
+      if (event.target.classList.contains("editBlockButton")) {
+        const blockItem = event.target.parentNode;
+        const blockId = blockItem.dataset.id;
+        const time = blockItem.dataset.time;
+        const price = blockItem.dataset.price;
+    
+        const updatedTime = prompt("Nhập thời gian mới:", time);
+        const updatedPrice = prompt("Nhập giá mới:", price);
+    
+        if (updatedTime !== null && updatedPrice !== null) {
+          try {
+            await fetch(`${databaseURL}/blocks/${blockId}.json`, {
+              method: "PATCH",
+              body: JSON.stringify({
+                time: updatedTime,
+                price: updatedPrice
+              }),
+              headers: {
+                "Content-Type": "application/json"
+              }
+            });
+    
+            alert("Đã cập nhật block thành công!");
+            displayBlocks(); // Hiển thị lại danh sách block sau khi cập nhật
+          } catch (error) {
+            console.error("Lỗi khi cập nhật block:", error);
+          }
+        }
+      }
+    });
+    
+    // Xóa block
+    blocksContainer.addEventListener("click", async (event) => {
+      if (event.target.classList.contains("deleteBlockButton")) {
+        const blockItem = event.target.parentNode;
+        const blockId = blockItem.dataset.id;
+    
+        const confirmation = confirm("Bạn có chắc chắn muốn xóa block này?");
+        if (confirmation) {
+          try {
+            await fetch(`${databaseURL}/blocks/${blockId}.json`, {
+              method: "DELETE"
+            });
+    
+            alert("Đã xóa block thành công!");
+            displayBlocks(); // Hiển thị lại danh sách block sau khi xóa
+          } catch (error) {
+            console.error("Lỗi khi xóa block:", error);
+          }
+        }
+      }
+    });
+    
+    // Thêm block
+    addBlockForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+    
+      const formData = new FormData(addBlockForm);
+      const time = formData.get("time");
+      const price = formData.get("price");
+    
+      if (time && price) {
+        addBlockButton.disabled = true; // Tắt nút "Thêm block" trong thời gian chờ
+    
+        try {
+          const response = await fetch(`${databaseURL}/blocks.json`, {
+            method: "POST",
+            body: JSON.stringify({
+              time: time,
+              price: price
+            }),
+            headers: {
+              "Content-Type": "application/json"
+            }
+          });
+          const data = await response.json();
+    
+          console.log("Block đã được thêm:", data);
+    
+          addBlockButton.disabled = false; // Mở lại nút "Thêm block"
+          alert("Đã thêm block thành công!"); // Hiển thị cảnh báo
+          
+          displayBlocks(); // Hiển thị lại danh sách block sau khi thêm
+        } catch (error) {
+          console.error("Lỗi khi thêm block:", error);
+        }
+      }
+    });
+    
+    // Hiển thị danh sách block khi tải trang
+    displayBlocks();
+    
+    </script>
+    
 </body>
 </html>

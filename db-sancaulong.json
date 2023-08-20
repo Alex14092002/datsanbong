@@ -1,0 +1,98 @@
+{
+  "blocks": {
+    "-Nc5c4AZJsaShIhcYiAc": {
+      "listbook": {
+        "-NcHef6FqBNHUrcktlZJ": {
+          "paymentMethod": "cash",
+          "san": "Sân A3",
+          "status": "Đang chờ duyệt",
+          "user": "0937336807"
+        },
+        "-NcHepUrj1uEnkzmKCMT": {
+          "paymentMethod": "cash",
+          "san": "Sân A4",
+          "status": "Đang chờ duyệt",
+          "user": "0333696777"
+        }
+      },
+      "price": "30000",
+      "time": "4:30"
+    },
+    "-Nc5cXo46XVeho6kt10Y": {
+      "price": "3000000",
+      "time": "5:00"
+    },
+    "-Nc5c_gI_Nq61NWsFa5D": {
+      "price": "50000000",
+      "time": "5:30"
+    },
+    "-Nc7AMzF0al4kvU8HDRu": {
+      "price": "2000000",
+      "time": "6:00"
+    }
+  },
+  "khu": {
+    "0": {
+      "sân": {
+        "0": {
+          "ten": "Sân A1"
+        },
+        "1": {
+          "ten": "Sân A2"
+        },
+        "-Nc7CghTkke4Mvjb3hzz": {
+          "ten": "Sân A3"
+        },
+        "-Nc7Ci4GWLRIUwro0IPj": {
+          "ten": "Sân A4"
+        }
+      },
+      "ten": "Khu A"
+    },
+    "1": {
+      "sân": {
+        "0": {
+       
+          "ten": "Sân B1"
+        },
+        "1": {
+        
+          "ten": "Sân B2"
+        },
+        "-Nc5bz21wxTl9_EPEO1O": {
+       
+          "ten": "Sân B3"
+        },
+        "-Nc7C25KUcQRtGFdUl1m": {
+          "ten": "Sân B4"
+        }
+      },
+      "ten": "Khu B"
+    },
+    "-Nc5dM_IUJDDcl5wBWvv": {
+      "sân": {
+    
+        "-Nc7C5hQ8lVVYl0rEQkK": {
+          "ten": "Sân C2"
+        }
+      },
+      "ten": "Khu C"
+    }
+  },
+  "user": {
+    "-NcHdsH_ax7Lc6Hb9Vsy": {
+      "level": 1,
+      "name": "Lê Tuán",
+      "password": "123",
+      "phone": "0937336807",
+      "public": true
+    },
+    "-NcHejbqUGhgSilAAzzR": {
+      "level": 1,
+      "name": "Trình",
+      "password": "123",
+      "phone": "0333696777",
+      "public": true
+    }
+  }
+}

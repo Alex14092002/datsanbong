@@ -168,6 +168,7 @@ function displayTableForKhu(khuId) {
     .then((data) => {
       // Create thead with columns
       const thead = document.createElement("thead");
+      thead.classList.add('sticky-top' , 'bg-light')
       const theadRow = document.createElement("tr");
       const timeHeader = document.createElement("th");
       timeHeader.scope = "col";
