@@ -131,50 +131,58 @@ const tabContainer = document.getElementById("pills-tab");
         tabContainer.innerHTML = "";
         contentContainer.innerHTML = "";
         fetch(`${databaseURL}/khu.json`)
-          .then((response) => response.json())
-          .then((data) => {
-            let firstKhuId = null;
+        .then((response) => response.json())
+        .then((data) => {
+          let firstKhuId = null;
 
-            for (const khuId in data) {
-              const khu = data[khuId];
+          for (const khuId in data) {
+            const khu = data[khuId];
 
-              if (!firstKhuId) {
-                firstKhuId = khuId;
-              }
-
-              const tabLink = document.createElement("button");
-              tabLink.classList.add("nav-link");
-              tabLink.textContent = khu.ten;
-              tabLink.setAttribute("data-bs-toggle", "pill");
-              tabLink.setAttribute("data-bs-target", `#khu-${khuId}`);
-              tabLink.setAttribute("role", "tab");
-              tabLink.setAttribute("aria-controls", `khu-${khuId}`);
-              tabLink.setAttribute("aria-selected", "false");
-              tabContainer.appendChild(tabLink);
-
-              const tabPane = document.createElement("div");
-              tabPane.classList.add("tab-pane", "fade");
-              tabPane.id = `khu-${khuId}`;
-              tabPane.setAttribute("role", "tabpanel");
-              tabPane.setAttribute("aria-labelledby", `khu-${khuId}-tab`);
-              contentContainer.appendChild(tabPane);
-
-              displayTableForKhu(khuId);
+            if (!firstKhuId) {
+              firstKhuId = khuId;
             }
 
-            const firstTabLink = document.querySelector(
-              `[data-bs-target="#khu-${firstKhuId}"]`
-            );
-            const firstTabPane = document.getElementById(`khu-${firstKhuId}`);
+            const tabLink = document.createElement("button");
+            tabLink.classList.add("nav-link");
+            tabLink.textContent = khu.ten;
+            tabLink.setAttribute("data-bs-toggle", "pill");
+            tabLink.setAttribute("data-bs-target", `#khu-${khuId}`);
+            tabLink.setAttribute("role", "tab");
+            tabLink.setAttribute("aria-controls", `khu-${khuId}`);
+            tabLink.setAttribute("aria-selected", "false");
+            tabContainer.appendChild(tabLink);
 
-            if (firstTabLink && firstTabPane) {
-              firstTabLink.classList.add("active");
-              firstTabPane.classList.add("show", "active");
-            }
-          })
-          .catch((error) => {
-            console.error("Lỗi khi tải danh sách khu:", error);
-          });
+            const tabPane = document.createElement("div");
+            tabPane.classList.add("tab-pane", "fade");
+            tabPane.id = `khu-${khuId}`;
+            tabPane.setAttribute("role", "tabpanel");
+            tabPane.setAttribute("aria-labelledby", `khu-${khuId}-tab`);
+            contentContainer.appendChild(tabPane);
+
+            displayTableForKhu(khuId);
+
+            const manageSanButton = document.createElement("button");
+            manageSanButton.textContent = "Quản lý sân";
+            manageSanButton.classList.add("btn", "btn-primary", "mb-3");
+            manageSanButton.addEventListener("click", () => {
+              window.location.href = `manage_san.html?khuId=${khuId}`;
+            });
+            tabPane.appendChild(manageSanButton);
+          }
+
+          const firstTabLink = document.querySelector(
+            `[data-bs-target="#khu-${firstKhuId}"]`
+          );
+          const firstTabPane = document.getElementById(`khu-${firstKhuId}`);
+
+          if (firstTabLink && firstTabPane) {
+            firstTabLink.classList.add("active");
+            firstTabPane.classList.add("show", "active");
+          }
+        })
+        .catch((error) => {
+          console.error("Lỗi khi tải danh sách khu:", error);
+        });
         // Tại đây, bạn có thể xử lý hiển thị thông tin đặt sân cho ngày đã chọn.
         // Bạn có thể sử dụng mã nguồn hiện tại của mình để tạo bảng và cập nhật sân trống.
       }
