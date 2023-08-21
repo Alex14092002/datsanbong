@@ -35,8 +35,16 @@
           <div class="formBx">
             <form action="" onsubmit="return false;">
               <h2>Đăng nhập</h2>
-              <input type="number" name="signinPhone" placeholder="Nhập số điện thoại" />
-              <input type="password" name="signinPassword" placeholder="Nhập mật khẩu" />
+              <input
+                type="number"
+                name="signinPhone"
+                placeholder="Nhập số điện thoại"
+              />
+              <input
+                type="password"
+                name="signinPassword"
+                placeholder="Nhập mật khẩu"
+              />
               <input type="submit" name="" value="Đăng Nhập" />
               <p class="signup">
                 Bạn chưa có tài khoản?
@@ -49,11 +57,19 @@
           <div class="formBx">
             <form action="" onsubmit="return false;">
               <h2>Đăng ký thành viên</h2>
-			  <input type="text" name="name" placeholder="Nhập họ và tên" />
-			  <input type="number" name="phone" placeholder="Nhập số điện thoại" />
-			  <input type="password" name="password" placeholder="Mật khẩu" />
-			  <input type="password" name="confirmPassword" placeholder="Nhập lại mật khẩu" />
-			  <input type="submit" name="" value="Đăng ký" />			  
+              <input type="text" name="name" placeholder="Nhập họ và tên" />
+              <input
+                type="number"
+                name="phone"
+                placeholder="Nhập số điện thoại"
+              />
+              <input type="password" name="password" placeholder="Mật khẩu" />
+              <input
+                type="password"
+                name="confirmPassword"
+                placeholder="Nhập lại mật khẩu"
+              />
+              <input type="submit" name="" value="Đăng ký" />
               <p class="signup">
                 Bạn đã có tài khoản?
                 <a href="#" onclick="toggleForm();">Đăng nhập.</a>
@@ -70,95 +86,125 @@
       </div>
     </section>
 
-   
-	  <script>
-        const toggleForm = () => {
-            const container = document.querySelector(".container");
-            container.classList.toggle("active");
-        };
-        
-        const databaseURL = "https://sancaul-default-rtdb.firebaseio.com";
-        
-        // Lấy tham chiếu đến các phần tử DOM của biểu mẫu đăng ký
-        const signupForm = document.querySelector(".signupBx form");
-        const nameInput = document.querySelector(".signupBx input[name='name']");
-        const phoneInput = document.querySelector(".signupBx input[name='phone']");
-        const passwordInput = document.querySelector(".signupBx input[name='password']");
-        const confirmPasswordInput = document.querySelector(".signupBx input[name='confirmPassword']");
-        
-        // Xử lý sự kiện khi người dùng nhấn nút "Đăng ký"
-        signupForm.addEventListener("submit", (event) => {
-            event.preventDefault();
-            
-            const name = nameInput.value;
-            const phone = phoneInput.value;
-            const password = passwordInput.value;
-            const confirmPassword = confirmPasswordInput.value;
-            
-            if (password !== confirmPassword) {
-                alert("Mật khẩu nhập lại không khớp");
-                return;
+    <script>
+      const toggleForm = () => {
+        const container = document.querySelector(".container");
+        container.classList.toggle("active");
+      };
+
+      const databaseURL = "https://sancaul-default-rtdb.firebaseio.com";
+
+      // Lấy tham chiếu đến các phần tử DOM của biểu mẫu đăng ký
+      const signupForm = document.querySelector(".signupBx form");
+      const nameInput = document.querySelector(".signupBx input[name='name']");
+      const phoneInput = document.querySelector(
+        ".signupBx input[name='phone']"
+      );
+      const passwordInput = document.querySelector(
+        ".signupBx input[name='password']"
+      );
+      const confirmPasswordInput = document.querySelector(
+        ".signupBx input[name='confirmPassword']"
+      );
+
+      signupForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const name = nameInput.value;
+        const phone = phoneInput.value;
+        const password = passwordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+
+        if (password !== confirmPassword) {
+          alert("Mật khẩu nhập lại không khớp");
+          return;
+        }
+
+        // Kiểm tra xem số điện thoại đã tồn tại trong cơ sở dữ liệu chưa
+        fetch(`${databaseURL}/user.json`)
+          .then((response) => response.json())
+          .then((users) => {
+            const isPhoneTaken = Object.values(users).some(
+              (user) => user.phone === phone
+            );
+            if (isPhoneTaken) {
+              alert("Số điện thoại đã tồn tại");
+              return;
             }
-            
+
             const userData = {
-                name: name,
-                phone: phone,
-                password: password,
-                public : true,
-                level : 1
+              name: name,
+              phone: phone,
+              password: password,
+              public: true,
+              level: 1,
             };
-            
+
             // Gửi dữ liệu đăng ký lên Firebase
             fetch(`${databaseURL}/user.json`, {
-                method: "POST",
-                body: JSON.stringify(userData),
-                headers: {
-                    "Content-Type": "application/json",
-                },
+              method: "POST",
+              body: JSON.stringify(userData),
+              headers: {
+                "Content-Type": "application/json",
+              },
             })
-            .then((response) => response.json())
-            .then((data) => {
+              .then((response) => response.json())
+              .then((data) => {
                 alert("Đăng ký thành công");
-            })
-            .catch((error) => {
+              })
+              .catch((error) => {
                 alert("Đã xảy ra lỗi khi đăng ký");
                 console.error("Lỗi khi gửi dữ liệu đăng ký:", error);
-            });
-        });
-        
-        // Lấy tham chiếu đến các phần tử DOM của biểu mẫu đăng nhập
-        const signinForm = document.querySelector(".signinBx form");
-        const signinPhoneInput = document.querySelector(".signinBx input[name='signinPhone']");
-        const signinPasswordInput = document.querySelector(".signinBx input[name='signinPassword']");
-        
-        // Xử lý sự kiện khi người dùng nhấn nút "Đăng nhập"
-        signinForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    
-    const signinPhone = signinPhoneInput.value;
-    const signinPassword = signinPasswordInput.value;
-    
-    fetch(`${databaseURL}/user.json`)
-    .then((response) => response.json())
-    .then((users) => {
-        const matchingUser = Object.entries(users).find(([key, user]) => user.phone === signinPhone && user.password === signinPassword);
-        if (matchingUser) {
-            const [userId, userData] = matchingUser;
-            localStorage.setItem("signedInUserId", userId);
-            localStorage.setItem('signedInPhone' , signinPhone)
-            alert("Đăng nhập thành công");
-            // Chuyển hướng hoặc thực hiện các hành động khác sau khi đăng nhập thành công
-            window.location.href = './index.html'
-        } else {
-            alert("Thông tin đăng nhập không chính xác");
-        }
-    })
-    .catch((error) => {
-        alert("Đã xảy ra lỗi khi đăng nhập");
-        console.error("Lỗi khi kiểm tra đăng nhập:", error);
-    });
-});
+              });
+          })
+          .catch((error) => {
+            alert("Đã xảy ra lỗi khi kiểm tra số điện thoại");
+            console.error("Lỗi khi kiểm tra số điện thoại:", error);
+          });
+      });
+
+      // Lấy tham chiếu đến các phần tử DOM của biểu mẫu đăng nhập
+      const signinForm = document.querySelector(".signinBx form");
+      const signinPhoneInput = document.querySelector(
+        ".signinBx input[name='signinPhone']"
+      );
+      const signinPasswordInput = document.querySelector(
+        ".signinBx input[name='signinPassword']"
+      );
+
+      // Xử lý sự kiện khi người dùng nhấn nút "Đăng nhập"
+      signinForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const signinPhone = signinPhoneInput.value;
+        const signinPassword = signinPasswordInput.value;
+
+        fetch(`${databaseURL}/user.json`)
+          .then((response) => response.json())
+          .then((users) => {
+            const matchingUser = Object.entries(users).find(
+              ([key, user]) =>
+                user.phone === signinPhone && user.password === signinPassword
+            );
+            if (matchingUser) {
+              const [userId, userData] = matchingUser;
+              localStorage.setItem("signedInUserId", userId);
+              localStorage.setItem("signedInPhone", signinPhone);
+              localStorage.setItem("status", userData.public);
+              localStorage.setItem("level" , userData.level)
+
+              alert("Đăng nhập thành công");
+              // Chuyển hướng hoặc thực hiện các hành động khác sau khi đăng nhập thành công
+              window.location.href = "./index.html";
+            } else {
+              alert("Thông tin đăng nhập không chính xác");
+            }
+          })
+          .catch((error) => {
+            alert("Đã xảy ra lỗi khi đăng nhập");
+            console.error("Lỗi khi kiểm tra đăng nhập:", error);
+          });
+      });
     </script>
-	  
   </body>
 </html>

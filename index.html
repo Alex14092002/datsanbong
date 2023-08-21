@@ -25,36 +25,15 @@
     }
   </style>
   <body>
-    
+    <div class="header px-3 py-4 d-flex justify-content-between"></div>
     <div id="app" class="">
-      <div class="header py-4 d-flex justify-content-between"></div>
-
-
-
       <div class="mb-3">
         <label for="dateSelect" class="form-label">Chọn ngày:</label>
         <select class="form-select" id="dateSelect"></select>
       </div>
 
-      <table class="skeletonTableBody">
-        <tbody >
-          <tr>
-            <td colspan="10" class="skeleton"></td>
-          </tr>
-          <tr>
-            <td colspan="10" class="skeleton"></td>
-          </tr>
-          <!-- Thêm thêm các dòng skeleton tương tự nếu cần -->
-        </tbody>
-      </table>
-      
-
       <div class="nav nav-pills mb-3" id="pills-tab" role="tablist"></div>
-      <div class="tab-content" id="pills-tabContent">
-        
-      </div>
-
-    
+      <div class="tab-content" id="pills-tabContent"></div>
     </div>
     <div
       class="modal fade"
@@ -105,7 +84,7 @@
         </div>
       </div>
     </div>
-
+    <script src="./js/header.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -113,17 +92,13 @@
     ></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-    <script src="./js/header.js"></script>
 
     <script>
-      const skeletonTableBody = document.querySelector('.skeletonTableBody')
-      console.log(skeletonTableBody);
       const tabContainer = document.getElementById("pills-tab");
       const contentContainer = document.getElementById("pills-tabContent");
       let currentDate;
-  
+
       document.addEventListener("DOMContentLoaded", function () {
-        
         const dateSelect = document.getElementById("dateSelect");
         currentDate = formatDate(new Date()); // Lấy ngày hiện tại
         const storedDate = localStorage.getItem("selectedDate");
@@ -348,12 +323,11 @@
             }
             thead.appendChild(theadRow);
             table.appendChild(thead);
-           
+
             // Fetch the list of blocks
             fetch(`${databaseURL}/day/${currentDate}/blocks.json`)
               .then((response) => response.json())
               .then((blocks) => {
-              
                 // Create tbody with rows
                 const tbody = document.createElement("tbody");
                 for (const blockId in blocks) {
@@ -382,29 +356,68 @@
                       );
 
                       if (bookedSan) {
-                        blockCell.textContent =
-                          bookedSan.status + " - " + bookedSan.user;
-                        blockCell.classList.add("booked");
-                        blockCell.setAttribute("data-khuid", khuId);
-                        blockCell.setAttribute("data-sanid", sanId);
-                        blockCell.setAttribute("data-blockid", blockId);
-
-                        if (bookedSan.hasOwnProperty("bookingId")) {
-                          blockCell.setAttribute(
-                            "data-bookingid",
-                            bookedSan.bookingId
-                          );
-                        } else {
-                          const listbookIndex = Object.keys(listbookArray).find(
-                            (index) => listbookArray[index].san === san.ten
-                          );
-                          if (listbookIndex !== undefined) {
-                            blockCell.setAttribute(
-                              "data-bookingid",
-                              listbookIndex
+                        fetch(`${databaseURL}/user.json`)
+                          .then((response) => response.json())
+                          .then((users) => {
+                            const matchingUser = Object.entries(users).find(
+                              ([userId, userData]) =>
+                                userData.phone === bookedSan.user
                             );
-                          }
-                        }
+
+                            if (matchingUser) {
+                              const [userId, userData] = matchingUser;
+
+                              if (userData.public) {
+                                blockCell.textContent =
+                                  bookedSan.status + " - " + bookedSan.user + " - " + userData.level;
+                              } else {
+                                blockCell.textContent = bookedSan.status;
+                              }
+
+                              blockCell.classList.add("booked");
+                              blockCell.setAttribute("data-khuid", khuId);
+                              blockCell.setAttribute("data-sanid", sanId);
+                              blockCell.setAttribute("data-blockid", blockId);
+
+                              if (bookedSan.hasOwnProperty("bookingId")) {
+                                blockCell.setAttribute(
+                                  "data-bookingid",
+                                  bookedSan.bookingId
+                                );
+                              } else {
+                                const listbookArray = Array.isArray(
+                                  block.listbook
+                                )
+                                  ? block.listbook
+                                  : Object.values(block.listbook);
+
+                                const listbookIndex = Object.keys(
+                                  listbookArray
+                                ).find(
+                                  (index) =>
+                                    listbookArray[index].san === san.ten
+                                );
+
+                                if (listbookIndex !== undefined) {
+                                  blockCell.setAttribute(
+                                    "data-bookingid",
+                                    listbookIndex
+                                  );
+                                }
+                              }
+                            } else {
+                              // Không tìm thấy người dùng, hiển thị trạng thái đặt lịch
+                              blockCell.textContent = bookedSan.status;
+                            }
+                          })
+                          .catch((error) => {
+                            console.error(
+                              "Lỗi khi kiểm tra người dùng:",
+                              error
+                            );
+                            // Hiển thị trạng thái đặt lịch mặc định
+                            blockCell.textContent = bookedSan.status;
+                          });
                       } else {
                         const button = document.createElement("button");
                         button.textContent = "Đặt lịch";
